@@ -8,9 +8,17 @@ rapidapi_key = os.environ.get("RAPIDAPI_KEY")
 start_rounds = 5
 
 
+def start_game():
+    '''
+    Generates a new word and starts the game
+    '''
+    new_word = generate_word()
+    ask_question(start_rounds, new_word)
+
+
 def generate_word():
     '''
-    Generates a word
+    Generates a random word for the player to guess
     '''
     url = "https://random-words5.p.rapidapi.com/getMultipleRandom"
     querystring = {
@@ -23,21 +31,20 @@ def generate_word():
     }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
-    print(response.text)
-    print(response.text[2:-2])
+    # print(response.text)
+    # print(response.text[2:-2])
     return response.text[2:-2]
 
 
-def ask_question(rounds_remaining):
+def ask_question(rounds_remaining, word):
     '''
-    Asks the user to enter a word
+    Asks the user to enter a word and sets a number of start game variables
     '''
-    # new_word = generate_word()
-    print(new_word)
+    # print(word)
     answer = input("please enter a word: ")
     win = False
     results = []
-    determine_results(new_word, win, answer, results, rounds_remaining)
+    determine_results(word, win, answer, results, rounds_remaining)
 
 
 def determine_results(word, win, answer, results, rounds_remaining):
@@ -67,19 +74,25 @@ def determine_results(word, win, answer, results, rounds_remaining):
 
         if rounds_remaining <= 0:
             print("Your five chances have been used! Bad Luck!")
+            print("The word was: " + word)
             play_again()
-        elif win != True:
+        elif win is not True:
             print(results)
-            ask_question(rounds_remaining)
+            ask_question(rounds_remaining, word)
     else:
         print("That is not word you FOOL!!!")
+        ask_question(rounds_remaining, word)
 
 
 def play_again():
+    '''
+    Determines options for comtinued play after completion of five rounds or 
+    if the user wins
+    '''
     continue_play = input("Would you like to play again? Enter Y or N: ")
 
     if continue_play == "Y" or continue_play == "y":
-        ask_question(5)
+        start_game()
     elif continue_play == "N" or continue_play == "n":
         print("Thanks and come back soon")
     else:
@@ -87,8 +100,11 @@ def play_again():
 
 
 def rounds(current_round):
-    print(current_round)
+    '''
+    Keeps the count of rounds
+    '''
     rounds_remaining = current_round - 1
+    print(rounds_remaining)
     return rounds_remaining
 
 
@@ -106,7 +122,7 @@ def validate_word(word):
 
     response = requests.request("GET", url, headers=headers)
     data = response.text
-    print(data)
+    # print(data)
     result = ""
 
     x = 2
@@ -115,11 +131,11 @@ def validate_word(word):
         x += 1
 
     if result == 'success':
-        print("Value Entered is not a word")
+        # print("Value Entered is not a word")
         return False
     else:
-        print("that is a word")
+        # print("that is a word")
         return True
 
 
-ask_question(start_rounds)
+start_game()

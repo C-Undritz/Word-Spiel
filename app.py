@@ -13,6 +13,8 @@ def start_game():
     Generates a new word and starts the game
     '''
     new_word = generate_word()
+    print(new_word)
+    print(length(new_word))
     ask_question(start_rounds, new_word)
 
 
@@ -47,6 +49,43 @@ def ask_question(rounds_remaining, word):
     determine_results(word, win, answer, results, rounds_remaining)
 
 
+# def determine_results(word, win, answer, results, rounds_remaining):
+#     '''
+#     checks the user entered word to determine the win state and the hints array
+#     '''
+#     if validate_word(answer):
+#         if answer == word:
+#             win = True
+#             print("You Win!") 
+#             play_again()
+#         else:
+#             count = 0
+#             for letter in answer:
+#                 if letter in word:
+#                     results.insert(count, "*")
+#                     if letter in word[count]:
+#                         results.pop(count)
+#                         results.insert(count, "$")
+#                     count += 1
+#                 else:
+#                     results.insert(count, "-")
+#                     count += 1
+
+#         current_round = rounds_remaining
+#         rounds_remaining = rounds(current_round)
+
+#         if rounds_remaining <= 0:
+#             print("Your five chances have been used! Bad Luck!")
+#             print("The word was: " + word)
+#             play_again()
+#         elif win is not True:
+#             print(results)
+#             ask_question(rounds_remaining, word)
+#     else:
+#         print("That is not word you FOOL!!!")
+#         ask_question(rounds_remaining, word)
+
+
 def determine_results(word, win, answer, results, rounds_remaining):
     '''
     checks the user entered word to determine the win state and the hints array
@@ -58,17 +97,19 @@ def determine_results(word, win, answer, results, rounds_remaining):
             play_again()
         else:
             count = 0
-            for letter in answer:
-                if letter in word:
+            while count < answer.len():
+                print(word[count])
+                print(answer[count])
+                if word[count] == answer[count]:
+                    results.insert(count, "$")
+                elif functionX(word, answer, count):
                     results.insert(count, "*")
-                    if letter in word[count]:
-                        results.pop(count)
-                        results.insert(count, "$")
-                    count += 1
                 else:
-                    results.insert(count, "-")
-                    count += 1
+                    results.insert(count, "-")    
+                count += 1
+                print(results)
 
+        print(results)
         current_round = rounds_remaining
         rounds_remaining = rounds(current_round)
 
@@ -82,6 +123,7 @@ def determine_results(word, win, answer, results, rounds_remaining):
     else:
         print("That is not word you FOOL!!!")
         ask_question(rounds_remaining, word)
+
 
 
 def play_again():

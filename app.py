@@ -1,5 +1,6 @@
 import requests
 import os
+import numpy as np
 if os.path.exists("env.py"):
     import env
 
@@ -12,9 +13,10 @@ def start_game():
     '''
     Generates a new word and starts the game
     '''
-    new_word = generate_word()
-    print(new_word)
-    print(length(new_word))
+    # new_word = generate_word()
+    new_word = "aabba"
+    # print(new_word)
+    # print(length(new_word))
     ask_question(start_rounds, new_word)
 
 
@@ -90,40 +92,107 @@ def determine_results(word, win, answer, results, rounds_remaining):
     '''
     checks the user entered word to determine the win state and the hints array
     '''
-    if validate_word(answer):
-        if answer == word:
-            win = True
-            print("You Win!") 
-            play_again()
-        else:
-            count = 0
-            while count < answer.len():
-                print(word[count])
-                print(answer[count])
-                if word[count] == answer[count]:
-                    results.insert(count, "$")
-                elif functionX(word, answer, count):
-                    results.insert(count, "*")
-                else:
-                    results.insert(count, "-")    
-                count += 1
-                print(results)
-
-        print(results)
-        current_round = rounds_remaining
-        rounds_remaining = rounds(current_round)
-
-        if rounds_remaining <= 0:
-            print("Your five chances have been used! Bad Luck!")
-            print("The word was: " + word)
-            play_again()
-        elif win is not True:
-            print(results)
-            ask_question(rounds_remaining, word)
+    # if validate_word(answer):
+    if answer == word:
+        win = True
+        print("You Win!") 
+        play_again()
     else:
-        print("That is not word you FOOL!!!")
-        ask_question(rounds_remaining, word)
+        count_a = 0
+        word_array = []
+        answer_array = []
+        for letter in answer:
+            if letter in word[count_a]:
+                results.insert(count_a, "3")
+                word_array.append("0")
+                answer_array.append("0")
+            else:
+                results.insert(count_a, "0")
+                word_array.append(word[count_a])
+                answer_array.append(answer[count_a])
+            count_a += 1
+        print("first pass for letters that are same in in same place:")
+        print(word_array)
+        print(answer_array)
+        print(results)
+        print("--------------------------")
 
+        count_b = 0
+        insert_count = 0
+        for number in results:
+            if number == "2" or number == "3":
+                count_b += 1
+            else:
+                value = answer_array[count_b]
+                # word_array_value_count = np.count_nonzero(word_array == value)
+                # answer_array_value_count = np.count_nonzero(answer_array == value)
+                word_array_value_count = count_values(word_array, value)
+                answer_array_value_count = count_values(answer_array, value)
+                print("line 125, value is: " + value)
+                print("line 126, word array value count: " + str(word_array_value_count))
+                print("line 127, answer array value count: " + str(answer_array_value_count))
+                if value not in word_array:
+                    results.pop(count_b)
+                    results.insert(count_b, "1")
+                    count_b += 1
+                elif word_array_value_count >= answer_array_value_count:
+                    for character in answer_array:
+                        if character == value:
+                            results.pop(count_b)
+                            results.insert(count_b, "2")
+                    count_b += 1
+                elif word_array_value_count < answer_array_value_count:
+                    for character in answer_array:
+                        if insert_count == word_array_value_count:
+                            results.pop(count_b)
+                            results.insert(count_b, "1")
+                            print("1 added")
+                            print(results)
+                        elif character == value:
+                            results.pop(count_b)
+                            results.insert(count_b, "2")
+                            insert_count += 1
+                            print("2 added")
+                            print(results)
+                        count_b += 1
+
+            print(word_array)
+            print(answer_array)
+            print(results)
+
+             
+
+
+
+
+
+        # count = 0
+        # while count < answer.len():
+        #     print(word[count])
+        #     print(answer[count])
+        #     if word[count] == answer[count]:
+        #         results.insert(count, "$")
+        #     elif functionX(word, answer, count):
+        #         results.insert(count, "*")
+        #     else:
+        #         results.insert(count, "-")    
+        #     count += 1
+        #     print(results)
+
+    print(results)
+    current_round = rounds_remaining
+    rounds_remaining = rounds(current_round)
+
+    if rounds_remaining <= 0:
+        print("Your five chances have been used! Bad Luck!")
+        print("The word was: " + word)
+        play_again()
+    elif win is not True:
+        print(results)
+        ask_question(rounds_remaining, word)
+    # else:
+    #     print("That is not word you FOOL!!!")
+    #     ask_question(rounds_remaining, word)
 
 
 def play_again():
@@ -178,6 +247,18 @@ def validate_word(word):
     else:
         # print("that is a word")
         return True
+
+
+def count_values(array, value):
+    '''
+    Returns a count of how many times the value occurs in the array
+    '''
+    count = 0
+    for char in array:
+        if char == value:
+            count += 1
+    
+    return count
 
 
 start_game()

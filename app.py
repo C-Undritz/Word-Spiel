@@ -58,6 +58,16 @@ def determine_results(word, win, answer, results, rounds_remaining):
             count_a = 0
             word_array = []
             answer_array = []
+            # First check loops through the player answer and determines any
+            # characters that are present in the word and are in the correct
+            # position.  For each or these a '3' is entered into the results
+            # array.  For any that are not then a '0' is entered into the
+            # results array.  Two new arrays are populated: word_array and
+            # answer_array, which are needed for the next checks.  These are
+            # populated with the characters from the word and answer, but
+            # where there is a correct answer at this stage a '0' is added,
+            # as this value has already been assessed and should not be
+            # included in the next stage of checks.
             for letter in answer:
                 if letter in word[count_a]:
                     results.insert(count_a, "3")
@@ -69,6 +79,9 @@ def determine_results(word, win, answer, results, rounds_remaining):
                     answer_array.append(answer[count_a])
                 count_a += 1
 
+            # Second check loops through the results array and populates the
+            # values based on checks of the remaining values within the
+            # word_array and answer array adding values 1, 2, or 4 as hints.
             count_b = 0
             for number in results:
                 if number == "1" or number == "2" or number == "3" or number == "4":
@@ -82,12 +95,22 @@ def determine_results(word, win, answer, results, rounds_remaining):
                         results.insert(count_b, "1")
                         count_b += 1
                     elif word_array_value_count >= answer_array_value_count:
+                        # if there is more or the same of the character value
+                        # in the word when compared to that value in the
+                        # answer then all instances of the character can be
+                        # marked as occuring in the word but not in the
+                        # correct position.
                         for character in answer_array:
                             if character == value:
                                 results.pop(count_b)
                                 results.insert(count_b, "2")
                         count_b += 1
                     elif word_array_value_count < answer_array_value_count:
+                        # if there is less of the character value in the word
+                        # when compared to that value in the answer then a
+                        # more complex check is required as not all instances
+                        # of the character can be marked as occuring in the
+                        # word.
                         insert_count = 0
                         count_c = 0
                         for character in answer_array:

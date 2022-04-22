@@ -1,6 +1,5 @@
 import requests
 import os
-import numpy as np
 if os.path.exists("env.py"):
     import env
 
@@ -13,10 +12,8 @@ def start_game():
     '''
     Generates a new word and starts the game
     '''
-    # new_word = generate_word()
-    new_word = "aabba"
-    # print(new_word)
-    # print(length(new_word))
+    new_word = generate_word()
+    print(new_word)
     ask_question(start_rounds, new_word)
 
 
@@ -35,8 +32,6 @@ def generate_word():
     }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
-    # print(response.text)
-    # print(response.text[2:-2])
     return response.text[2:-2]
 
 
@@ -44,160 +39,93 @@ def ask_question(rounds_remaining, word):
     '''
     Asks the user to enter a word and sets a number of start game variables
     '''
-    # print(word)
     answer = input("please enter a word: ")
     win = False
     results = []
     determine_results(word, win, answer, results, rounds_remaining)
 
 
-# def determine_results(word, win, answer, results, rounds_remaining):
-#     '''
-#     checks the user entered word to determine the win state and the hints array
-#     '''
-#     if validate_word(answer):
-#         if answer == word:
-#             win = True
-#             print("You Win!") 
-#             play_again()
-#         else:
-#             count = 0
-#             for letter in answer:
-#                 if letter in word:
-#                     results.insert(count, "*")
-#                     if letter in word[count]:
-#                         results.pop(count)
-#                         results.insert(count, "$")
-#                     count += 1
-#                 else:
-#                     results.insert(count, "-")
-#                     count += 1
-
-#         current_round = rounds_remaining
-#         rounds_remaining = rounds(current_round)
-
-#         if rounds_remaining <= 0:
-#             print("Your five chances have been used! Bad Luck!")
-#             print("The word was: " + word)
-#             play_again()
-#         elif win is not True:
-#             print(results)
-#             ask_question(rounds_remaining, word)
-#     else:
-#         print("That is not word you FOOL!!!")
-#         ask_question(rounds_remaining, word)
-
-
 def determine_results(word, win, answer, results, rounds_remaining):
     '''
     checks the user entered word to determine the win state and the hints array
     '''
-    # if validate_word(answer):
-    if answer == word:
-        win = True
-        print("You Win!") 
-        play_again()
-    else:
-        count_a = 0
-        word_array = []
-        answer_array = []
-        for letter in answer:
-            if letter in word[count_a]:
-                results.insert(count_a, "3")
-                word_array.append("0")
-                answer_array.append("0")
-            else:
-                results.insert(count_a, "0")
-                word_array.append(word[count_a])
-                answer_array.append(answer[count_a])
-            count_a += 1
-        print("first pass for letters that are same in in same place:")
-        print(word_array)
-        print(answer_array)
-        print(results)
-        print("--------------------------")
+    if validate_word(answer):
+        if answer == word:
+            win = True
+            print("You Win!")
+            play_again()
+        else:
+            count_a = 0
+            word_array = []
+            answer_array = []
+            for letter in answer:
+                if letter in word[count_a]:
+                    results.insert(count_a, "3")
+                    word_array.append("0")
+                    answer_array.append("0")
+                else:
+                    results.insert(count_a, "0")
+                    word_array.append(word[count_a])
+                    answer_array.append(answer[count_a])
+                count_a += 1
 
-        count_b = 0
-        insert_count = 0
-        for number in results:
-            if number == "2" or number == "3":
-                count_b += 1
-            else:
-                value = answer_array[count_b]
-                # word_array_value_count = np.count_nonzero(word_array == value)
-                # answer_array_value_count = np.count_nonzero(answer_array == value)
-                word_array_value_count = count_values(word_array, value)
-                answer_array_value_count = count_values(answer_array, value)
-                print("line 125, value is: " + value)
-                print("line 126, word array value count: " + str(word_array_value_count))
-                print("line 127, answer array value count: " + str(answer_array_value_count))
-                if value not in word_array:
-                    results.pop(count_b)
-                    results.insert(count_b, "1")
+            count_b = 0
+            for number in results:
+                if number == "1" or number == "2" or number == "3" or number == "4":
                     count_b += 1
-                elif word_array_value_count >= answer_array_value_count:
-                    for character in answer_array:
-                        if character == value:
-                            results.pop(count_b)
-                            results.insert(count_b, "2")
-                    count_b += 1
-                elif word_array_value_count < answer_array_value_count:
-                    for character in answer_array:
-                        if insert_count == word_array_value_count:
-                            results.pop(count_b)
-                            results.insert(count_b, "1")
-                            print("1 added")
-                            print(results)
-                        elif character == value:
-                            results.pop(count_b)
-                            results.insert(count_b, "2")
-                            insert_count += 1
-                            print("2 added")
-                            print(results)
+                else:
+                    value = answer_array[count_b]
+                    word_array_value_count = count_values(word_array, value)
+                    answer_array_value_count = count_values(answer_array, value)
+                    if value not in word_array:
+                        results.pop(count_b)
+                        results.insert(count_b, "1")
+                        count_b += 1
+                    elif word_array_value_count >= answer_array_value_count:
+                        for character in answer_array:
+                            if character == value:
+                                results.pop(count_b)
+                                results.insert(count_b, "2")
+                        count_b += 1
+                    elif word_array_value_count < answer_array_value_count:
+                        insert_count = 0
+                        count_c = 0
+                        for character in answer_array:
+                            if results[count_c] == "1" or results[count_c] == "2" or results[count_c] == "3" or results[count_c] == "4":
+                                count_c += 1
+                            elif (character == value) and (insert_count == word_array_value_count):
+                                results.pop(count_c)
+                                results.insert(count_c, "4")
+                                count_c += 1
+                            elif character == value:
+                                results.pop(count_c)
+                                results.insert(count_c, "2")
+                                insert_count += 1
+                                count_c += 1
+                            elif character != value:
+                                results.pop(count_c)
+                                results.insert(count_c, "0")
+                                count_c += 1
                         count_b += 1
 
-            print(word_array)
-            print(answer_array)
-            print(results)
-
-             
-
-
-
-
-
-        # count = 0
-        # while count < answer.len():
-        #     print(word[count])
-        #     print(answer[count])
-        #     if word[count] == answer[count]:
-        #         results.insert(count, "$")
-        #     elif functionX(word, answer, count):
-        #         results.insert(count, "*")
-        #     else:
-        #         results.insert(count, "-")    
-        #     count += 1
-        #     print(results)
-
-    print(results)
-    current_round = rounds_remaining
-    rounds_remaining = rounds(current_round)
-
-    if rounds_remaining <= 0:
-        print("Your five chances have been used! Bad Luck!")
-        print("The word was: " + word)
-        play_again()
-    elif win is not True:
         print(results)
+        current_round = rounds_remaining
+        rounds_remaining = rounds(current_round)
+
+        if rounds_remaining <= 0:
+            print("Your five chances have been used! Bad Luck!")
+            print("The word was: " + word)
+            play_again()
+        elif win is not True:
+            ask_question(rounds_remaining, word)
+    else:
+        print("That is not word you FOOL!!!")
         ask_question(rounds_remaining, word)
-    # else:
-    #     print("That is not word you FOOL!!!")
-    #     ask_question(rounds_remaining, word)
 
 
 def play_again():
     '''
-    Determines options for comtinued play after completion of five rounds or 
+    Determines options for comtinued play after completion of five rounds or
     if the user wins
     '''
     continue_play = input("Would you like to play again? Enter Y or N: ")
@@ -233,7 +161,6 @@ def validate_word(word):
 
     response = requests.request("GET", url, headers=headers)
     data = response.text
-    # print(data)
     result = ""
 
     x = 2
@@ -242,10 +169,8 @@ def validate_word(word):
         x += 1
 
     if result == 'success':
-        # print("Value Entered is not a word")
         return False
     else:
-        # print("that is a word")
         return True
 
 
@@ -257,7 +182,7 @@ def count_values(array, value):
     for char in array:
         if char == value:
             count += 1
-    
+
     return count
 
 

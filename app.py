@@ -1,6 +1,7 @@
 import requests
 import os
-from flask import Flask
+from flask import (
+    Flask, render_template)
 if os.path.exists("env.py"):
     import env
 
@@ -12,8 +13,12 @@ start_rounds = 5
 
 
 @app.route("/")
-def hello():
-    return"Hello World"
+@app.route("/game_screen")
+def game_screen():
+    """
+    Displays the game screen 
+    """
+    return render_template("game_screen.html")
 
 
 # def start_game():

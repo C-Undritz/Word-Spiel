@@ -1,7 +1,8 @@
 import requests
 import os
 from flask import (
-    Flask, render_template)
+    Flask, render_template,
+    redirect, request, session, url_for)
 if os.path.exists("env.py"):
     import env
 
@@ -20,6 +21,22 @@ def game_screen():
     """
     return render_template("game_screen.html")
 
+
+@app.route("/games_screen", methods=["GET", "POST"])
+def submit_word():
+    """
+    Processes the submitted word per guess
+    """
+    i = 1
+    guess = ""
+    if request.method == "POST":
+        while i <= 5:
+            guess += request.form.get("char-"+str(i)).lower()
+            i += 1
+
+    print(guess)
+
+    return redirect(url_for("game_screen"))
 
 # def start_game():
 #     '''

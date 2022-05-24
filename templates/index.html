@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block styles %}
+
+<a href="{{ url_for('start_game') }}">
+    Start
+</a>
+
+{% endblock %}
+{% block scripts %}
+
+<script src="{{ url_for('static', filename='js/game_screen.js') }}"></script>
+
+{% endblock %}

@@ -2,7 +2,8 @@ import os
 from flask import (
     Flask, render_template,
     redirect, request, session, url_for)
-from game_logic import generate_word
+from game_logic import (
+    generate_word, determine_results)
 if os.path.exists("env.py"):
     import env
 
@@ -19,8 +20,8 @@ def home():
     """
     Displays the start screen 
     """
-    word = generate_word()
-    print(word)
+    generate_word()
+
     return render_template("index.html")
 
 
@@ -30,13 +31,15 @@ def start_game():
     Processes the submitted word per guess
     """
     i = 1
-    guess = ""
+    answer = ""
     if request.method == "POST":
         while i <= 5:
-            guess += request.form.get("char-"+str(i)).lower()
+            answer += request.form.get("char-"+str(i)).lower()
             i += 1
 
-        print(guess)
+        print(answer)
+
+        determine_results(answer)
 
         return redirect(url_for("start_game"))
 

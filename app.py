@@ -1,29 +1,31 @@
-import requests
 import os
 from flask import (
     Flask, render_template,
     redirect, request, session, url_for)
+from game_logic import generate_word
 if os.path.exists("env.py"):
     import env
 
 
 app = Flask(__name__)
 
-rapidapi_key = os.environ.get("RAPIDAPI_KEY")
+
 start_rounds = 5
 
 
 @app.route("/")
-@app.route("/game_screen")
-def game_screen():
+@app.route("/home")
+def home():
     """
-    Displays the game screen 
+    Displays the start screen 
     """
-    return render_template("game_screen.html")
+    word = generate_word()
+    print(word)
+    return render_template("index.html")
 
 
 @app.route("/games_screen", methods=["GET", "POST"])
-def submit_word():
+def start_game():
     """
     Processes the submitted word per guess
     """
@@ -34,9 +36,11 @@ def submit_word():
             guess += request.form.get("char-"+str(i)).lower()
             i += 1
 
-    print(guess)
+        print(guess)
 
-    return redirect(url_for("game_screen"))
+        return redirect(url_for("start_game"))
+
+    return render_template("game_screen.html")
 
 # def start_game():
 #     '''

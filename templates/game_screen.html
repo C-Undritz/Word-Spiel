@@ -3,7 +3,7 @@
 {% block styles %}
 
 <div id="input-boxes">
-    <form id="char-input-form" method="POST" action="{{ url_for('submit_word') }}">
+    <form id="char-input-form" method="POST" action="{{ url_for('start_game') }}">
         <input type="text" class="char-input-box" id="1" name="char-1" maxlength="1" style="text-transform:uppercase">
         <input type="text" class="char-input-box" id="2" name="char-2" maxlength="1" style="text-transform:uppercase">
         <input type="text" class="char-input-box" id="3" name="char-3" maxlength="1" style="text-transform:uppercase">
@@ -12,6 +12,10 @@
         <button type="submit">Submit</button>
     </form>
 </div>
+
+<a href="{{ url_for('home') }}">
+    Quit
+</a>
 
 {% endblock %}
 {% block scripts %}

@@ -11,6 +11,17 @@
         <input type="text" class="char-input-box" id="5" name="char-5" maxlength="1" style="text-transform:uppercase">
         <button type="submit">Submit</button>
     </form>
+    {% if STARTED == True %}
+    <p>STARTED is True</p>
+    {% for key in results.items() %}
+    <h1>Key: {{key[0]}}</h1>
+    {% for letter in key[0] %}
+    <p>{{ letter }}</p>
+    {% endfor %}
+    {% endfor %}
+    {% else %}
+    <p>STARTED?</p>
+    {% endif %}
 </div>
 
 <a href="{{ url_for('home') }}">

@@ -10,6 +10,7 @@ if os.path.exists("env.py"):
 
 
 app = Flask(__name__)
+STARTED = False
 
 
 @app.route("/")
@@ -30,6 +31,8 @@ def start_game():
     """
     i = 1
     answer = ""
+    global STARTED
+
     if request.method == "POST":
         while i <= 5:
             answer += request.form.get("char-"+str(i)).lower()
@@ -39,13 +42,15 @@ def start_game():
 
         if validate_word(answer):
             results = determine_results(answer)
+            STARTED = True
             print('result', str(results))
+            return render_template("game_screen.html", STARTED=STARTED, results=results)
         else:
             print("That is not word you FOOL!!!")
 
         return redirect(url_for("start_game"))
 
-    return render_template("game_screen.html")
+    return render_template("game_screen.html", STARTED=STARTED)
 
 
 if __name__ == "__main__":

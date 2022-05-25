@@ -3,7 +3,8 @@ from flask import (
     Flask, render_template,
     redirect, request, session, url_for)
 from game_logic import (
-    generate_word, determine_results)
+    generate_word, determine_results,
+    validate_word)
 if os.path.exists("env.py"):
     import env
 
@@ -39,7 +40,11 @@ def start_game():
 
         print(answer)
 
-        determine_results(answer)
+        if validate_word(answer):
+            results = determine_results(answer)
+            print('result', str(results))
+        else:
+            print("That is not word you FOOL!!!")
 
         return redirect(url_for("start_game"))
 

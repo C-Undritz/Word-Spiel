@@ -30,11 +30,23 @@ def generate_word():
     WORD = response.text[2:-2]
     CREATE_RESULTS_DICT = True
     print("line 29 ", WORD)
-    
+
+
+def determine_win(answer):
+    '''
+    Checks the user entered answer to determine whether user entered answer is
+    correct.
+    '''
+    if answer == WORD:
+        print("You Win!")
+        return True
+    else:
+        return False
+
 
 def determine_results(answer):
     '''
-    checks the user entered word to determine the win state and the hints array
+    Checks the user entered answer to determine how many letters are correct
     '''
     global CREATE_RESULTS_DICT
     global RESULTS_DICT
@@ -42,11 +54,12 @@ def determine_results(answer):
     print("line 36 ", WORD)
     results = []
 
-    if answer == WORD:
-        win = True
-        print("You Win!")
-        # play_again()
-    else:
+    # if answer == WORD:
+    #     win = True
+    #     print("You Win!")
+    #     # play_again()
+    # else:
+    if validate_word(answer):
         count_a = 0
         word_array = []
         answer_array = []
@@ -123,11 +136,12 @@ def determine_results(answer):
                             count_c += 1
                     count_b += 1
 
-    print(results)
-    RESULTS_DICT.update({answer: results})
-    print(RESULTS_DICT)
-    print(type(RESULTS_DICT))
-    print(len(RESULTS_DICT))
+        print(results)
+        RESULTS_DICT.update({answer: results})
+        print(RESULTS_DICT)
+        print(type(RESULTS_DICT))
+        print(len(RESULTS_DICT))
+        
     return RESULTS_DICT
     # current_round = rounds_remaining
     # rounds_remaining = rounds(current_round)

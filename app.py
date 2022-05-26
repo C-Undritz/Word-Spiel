@@ -4,7 +4,7 @@ from flask import (
     redirect, request, session, url_for)
 from game_logic import (
     generate_word, determine_results,
-    validate_word)
+    validate_word, determine_win)
 if os.path.exists("env.py"):
     import env
 
@@ -29,26 +29,44 @@ def start_game():
     """
     Processes the submitted word per guess
     """
+    global STARTED
+    
     i = 1
     answer = ""
-    global STARTED
-
     if request.method == "POST":
         while i <= 5:
             answer += request.form.get("char-"+str(i)).lower()
             i += 1
 
         print(answer)
+        valid_word = validate_word(answer)
 
-        if validate_word(answer):
+        if valid_word:
             results = determine_results(answer)
+            win = determine_win(answer)
             STARTED = True
-            print('result', str(results))
-            return render_template("game_screen.html", STARTED=STARTED, results=results)
-        else:
-            print("That is not word you FOOL!!!")
 
-        return redirect(url_for("start_game"))
+            return render_template("game_screen.html",
+                                   results=results,
+                                   valid=valid_word,
+                                   win=win,
+                                   started=STARTED)
+        else:
+            if STARTED:  # If word is not valid but beyond round 1 (STARTED = True)
+                results = determine_results(answer)
+                win = determine_win(answer)
+                STARTED = True
+                return render_template("game_screen.html",
+                                       results=results,
+                                       valid=valid_word,
+                                       win=win,
+                                       started=STARTED)
+            else:  # If word is not valid but only on round 1 (STARTED = False)
+                win = determine_win(answer)
+                return render_template("game_screen.html",
+                                       valid=valid_word,
+                                       win=win,
+                                       started=STARTED)
 
     return render_template("game_screen.html", STARTED=STARTED)
 

@@ -12,7 +12,7 @@ const reservedKeys = ["Backspace", "Delete", "Tab", "Shift"];
 const delay = 100; //sets delay for .5 second
 
 for (let i = 0; i < inputBoxes.length; i++) {
-    inputBoxes[i].addEventListener("keyup", function () {
+    inputBoxes[i].addEventListener("keydown", function () {
         if (reservedKeys.includes(event.key)) {
             inputBoxes[i].focus();
         } else {

@@ -4,25 +4,23 @@ body {
     width: 100%;
 }
 
+.input-bg-green,
+.input-bg-amber,
+.input-bg-grey,
 .char-input-box {
     width: 2.5%;
-    padding: 1px;
+    padding: 5px;
+    margin: 3px;
 }
 
 .input-bg-green {
-    width: 2.5%;
     background-color: #7AA86B;
-    padding: 1px;
 }
 
 .input-bg-amber {
-    width: 2.5%;
     background-color: #FFA54A;
-    padding: 1px;
 }
 
 .input-bg-grey {
-    width: 2.5%;
     background-color: #C0C0C0;
-    padding: 1px;
 }

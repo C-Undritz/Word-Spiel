@@ -34,6 +34,11 @@ Used [rapidapi.com](https://rapidapi.com/hub) to access the APIs used below:
 - [Random Words](https://rapidapi.com/sheharyar566/api/random-words5/): Used to generate a new word each game.
 
 
+># **REFERENCES**
+
+># **CREDIT & THANKS**
+# Code
+- [How to share global variables between files in Python](https://instructobit.com/tutorial/108/How-to-share-global-variables-between-files-in-Python)
 
 
 

@@ -1,16 +1,18 @@
 import os
+import globals
 from flask import (
     Flask, render_template,
     redirect, request, session, url_for)
 from game_logic import (
-    generate_word, determine_results,
+    determine_results,
     validate_word, determine_win)
+from classes import Game
 if os.path.exists("env.py"):
     import env
 
 
 app = Flask(__name__)
-STARTED = False
+rapidapi_key = os.environ.get("RAPIDAPI_KEY")
 
 
 @app.route("/")
@@ -19,8 +21,6 @@ def home():
     """
     Displays the start screen 
     """
-    generate_word()
-
     return render_template("index.html")
 
 
@@ -29,46 +29,24 @@ def start_game():
     """
     Processes the submitted word per guess
     """
-    global STARTED
-    
-    i = 1
-    answer = ""
+    game = Game(1, [])
+    game.show(33)
     if request.method == "POST":
+        answer = ""
+        i = 1
         while i <= 5:
             answer += request.form.get("char-"+str(i)).lower()
             i += 1
 
-        print(answer)
-        valid_word = validate_word(answer)
+        print("app.py, line 38.  Player answer is :", answer)
+        game.show(42)
+        round_results = determine_results(game.word, answer)
+        print("app.py, line 41.  Current_round results: ", str(round_results))
+        print(round_results.current_results)
+        game.show(46)
+        return render_template("game_screen.html")
 
-        if valid_word:
-            results = determine_results(answer)
-            win = determine_win(answer)
-            STARTED = True
-
-            return render_template("game_screen.html",
-                                   results=results,
-                                   valid=valid_word,
-                                   win=win,
-                                   started=STARTED)
-        else:
-            if STARTED:  # If word is not valid but beyond round 1 (STARTED = True)
-                results = determine_results(answer)
-                win = determine_win(answer)
-                STARTED = True
-                return render_template("game_screen.html",
-                                       results=results,
-                                       valid=valid_word,
-                                       win=win,
-                                       started=STARTED)
-            else:  # If word is not valid but only on round 1 (STARTED = False)
-                win = determine_win(answer)
-                return render_template("game_screen.html",
-                                       valid=valid_word,
-                                       win=win,
-                                       started=STARTED)
-
-    return render_template("game_screen.html", STARTED=STARTED)
+    return render_template("game_screen.html")
 
 
 if __name__ == "__main__":

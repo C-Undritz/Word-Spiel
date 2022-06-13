@@ -51,29 +51,37 @@ class Game:
         """
         Generates a random word for the player to guess.
         """
-        url = "https://random-words5.p.rapidapi.com/getMultipleRandom"
-        querystring = {
-            "count": "1",
-            "wordLength": "5"
-        }
-        headers = {
-            "X-RapidAPI-Host": "random-words5.p.rapidapi.com",
-            "X-RapidAPI-Key": rapidapi_key
-        }
+        # url = "https://random-words5.p.rapidapi.com/getMultipleRandom"
+        # querystring = {
+        #     "count": "1",
+        #     "wordLength": "5"
+        # }
+        # headers = {
+        #     "X-RapidAPI-Host": "random-words5.p.rapidapi.com",
+        #     "X-RapidAPI-Key": rapidapi_key
+        # }
 
-        response = requests.request("GET", url, headers=headers, params=querystring)
-        word = response.text[2:-2]
+        # response = requests.request("GET", url, headers=headers, params=querystring)
+        # word = response.text[2:-2]
+        word = "abcda"
         if validate_word(word):
             return word
         else:
             self.generate_word()
 
-    def add_results(self, answer, results):
+    # def add_results(self, answer, results):
+    #     """
+    #     Adds the results dictionary with each round guess and results
+    #     against each letter in the player guess
+    #     """
+    #     self.game_results.append({answer: results})
+
+    def add_results(self, value):
         """
         Adds the results dictionary with each round guess and results
         against each letter in the player guess
         """
-        self.game_results.append({answer: results})
+        self.game_results.append(value)
 
     def increment_count(self, value):
         """

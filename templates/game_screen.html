@@ -3,26 +3,6 @@
 {% block styles %}
 
 <div id="input-boxes">
-    {% if started %}
-    {% for key in results.items() %}
-    <form action="">
-        {% for letter in key[0] %}
-        {% set iteration = loop.index0 %}
-        {% if key[1][iteration] == '3' %}
-        {% set row_class = "input-bg-green" %}
-        {% elif key[1][iteration] == '2' %}
-        {% set row_class = "input-bg-amber" %}
-        {% else %}
-        {% set row_class = "input-bg-grey" %}
-        {% endif %}
-        <input type="text" class="{{ row_class }}" value="{{ letter }}" maxlength="1" style="text-transform:uppercase">
-        {% endfor %}
-    </form>
-    {% endfor %}
-    {% endif %}
-    {% if (started is true) and (win is true) %}
-    <p>Well done - you win!</p>
-    {% else %}
     <form id="char-input-form" method="POST" action="{{ url_for('start_game') }}">
         <input type="text" class="char-input-box" id="1" name="char-1" maxlength="1" style="text-transform:uppercase">
         <input type="text" class="char-input-box" id="2" name="char-2" maxlength="1" style="text-transform:uppercase">
@@ -31,7 +11,6 @@
         <input type="text" class="char-input-box" id="5" name="char-5" maxlength="1" style="text-transform:uppercase">
         <button type="submit">Submit</button>
     </form>
-    {% endif %}
 </div>
 
 <a href="{{ url_for('home') }}">

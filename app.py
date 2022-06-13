@@ -1,5 +1,4 @@
 import os
-import globals
 from flask import (
     Flask, render_template,
     redirect, request, session, url_for)
@@ -13,13 +12,14 @@ if os.path.exists("env.py"):
 
 app = Flask(__name__)
 rapidapi_key = os.environ.get("RAPIDAPI_KEY")
+game = Game(0, [])
 
 
 @app.route("/")
 @app.route("/home")
 def home():
     """
-    Displays the start screen 
+    Displays the start screen
     """
     return render_template("index.html")
 
@@ -29,8 +29,7 @@ def start_game():
     """
     Processes the submitted word per guess
     """
-    game = Game(1, [])
-    game.show(33)
+    print(game.word)
     if request.method == "POST":
         answer = ""
         i = 1
@@ -38,12 +37,10 @@ def start_game():
             answer += request.form.get("char-"+str(i)).lower()
             i += 1
 
-        print("app.py, line 38.  Player answer is :", answer)
-        game.show(42)
         round_results = determine_results(game.word, answer)
-        print("app.py, line 41.  Current_round results: ", str(round_results))
-        print(round_results.current_results)
-        game.show(46)
+        game.add_results(round_results)
+        game.increment_count(1)
+        print(game)
         return render_template("game_screen.html")
 
     return render_template("game_screen.html")

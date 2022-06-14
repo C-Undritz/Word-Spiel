@@ -40,9 +40,10 @@ def determine_results(word, answer):
             current_round.win = True
             return current_round
         else:
+            # Determines characters both in the word and answer in the same
+            # position.
             word_array = []
             answer_array = []
-            # determines characters in the word and in the correct position.
             for count, letter in enumerate(answer):
                 if letter == word[count]:
                     results.insert(count, "3")
@@ -52,54 +53,63 @@ def determine_results(word, answer):
                     results.insert(count, "0")
                     word_array.append(word[count])
                     answer_array.append(answer[count])
-            # print(current_round)
-            print("1----------------")
+
+            # Determines characters in the answer that are in the word by
+            # checking against the word_array.
+            for count, letter in enumerate(answer_array):
+                if letter == 0 or letter in word_array:
+                    continue
+                results.pop(count)
+                results.insert(count, "1")
+                answer_array.pop(count)
+                answer_array.insert(count, "0")
+
+            print("2----------------")
             print("Results array: ", str(results))
             print("Word array:    ", str(word_array))
             print("Answer array:  ", str(answer_array))
             print("-----------------")
-            for count, number in enumerate(results):
-                print("-----------------")
-                print("number is: ", str(number))
-                print("count is: ", str(count))
-                if number not in ('1', '2', '3'):
-                    value = answer_array[count]
-                    print("value is: ", str(value))
-                    # word_value_count = count_values(word_array, value)
-                    # answer_value_count = count_values(answer_array, value)
-                    if value not in word_array:
-                        results.pop(count)
-                        results.insert(count, "1")
-                        print("added 1st '1'")
-                    else:
-                        # while word_value_count >= answer_value_count:
-                        word_value_count = count_values(word_array, value)
-                        print("word value count is: ", str(word_value_count))
-                        # for i in range(len(answer_array)):
-                        for count, value in enumerate(answer_array):
-                            print("-----------------")
-                            print("character is: ", str(answer_array[count]))
-                            if results[count] in ('1', '2', '3'):
-                                continue
-                            elif answer_array[count] == value and word_value_count > 0:
-                                results.pop(count)
-                                results.insert(count, "2")
-                                word_value_count -= 1
-                                print("added a '2'")
-                            else:
-                                results.pop(count)
-                                results.insert(count, "1")
-                                print("added a final '1'")
-                            count += 1
-                else:
-                    print("skipped")
+
+            # for count, number in enumerate(results):
+            #     if number not in ('1', '2', '3'):
+            #         value = answer_array[count]
+            #         print("value is: ", str(value))
+            #         # word_value_count = count_values(word_array, value)
+            #         # answer_value_count = count_values(answer_array, value)
+            #         if value not in word_array:
+            #             results.pop(count)
+            #             results.insert(count, "1")
+            #             print("added 1st '1'")
+
+            #         else:
+            #             # while word_value_count >= answer_value_count:
+            #             word_value_count = count_values(word_array, value)
+            #             print("word value count is: ", str(word_value_count))
+            #             # for i in range(len(answer_array)):
+            #             for count, value in enumerate(answer_array):
+            #                 print("-----------------")
+            #                 print("character is: ", str(answer_array[count]))
+            #                 if results[count] in ('1', '2', '3'):
+            #                     continue
+            #                 elif answer_array[count] == value and word_value_count > 0:
+            #                     results.pop(count)
+            #                     results.insert(count, "2")
+            #                     word_value_count -= 1
+            #                     print("added a '2'")
+            #                 else:
+            #                     results.pop(count)
+            #                     results.insert(count, "1")
+            #                     print("added a final '1'")
+            #                 count += 1
+            #     else:
+            #         print("skipped")
 
 
-            current_round.add_round_results({answer: results})
-            print("2----------------")
-            print(results)
-            print(word_array)
-            print(answer_array)
+            # current_round.add_round_results({answer: results})
+            # print("2----------------")
+            # print(results)
+            # print(word_array)
+            # print(answer_array)
 
             return current_round
 

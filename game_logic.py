@@ -1,6 +1,7 @@
-import requests
+'''
+Module that Works out the current round results.
+'''
 import os
-import globals
 from classes import Round
 from validations import validate_word
 if os.path.exists("env.py"):
@@ -64,7 +65,7 @@ def determine_results(word, answer):
                 answer_array = array_update(answer_array, count, "0")
 
             # Determines characters both in the answer and word but not in the
-            # same position and updates the results with a '2' for each occurance.
+            # same position. Updates the results with a '2' for each occurance.
             for count, character in enumerate(answer_array):
                 if character == '0':
                     continue
@@ -72,7 +73,8 @@ def determine_results(word, answer):
                 if word_char_count > 0:
                     results = array_update(results, count, "2")
                     answer_array = array_update(answer_array, count, "0")
-                    # Updates word_array value with '0' so not included in word_char_count
+                    # Updates word_array value with '0' so not included in
+                    # word_char_count
                     for i, value in enumerate(word_array):
                         if value != character:
                             continue
@@ -82,22 +84,9 @@ def determine_results(word, answer):
                     results = array_update(results, count, "1")
                     answer_array = array_update(answer_array, count, "0")
 
-            print("3----------------")
-            print("Results array: ", str(results))
-            print("Word array:    ", str(word_array))
-            print("Answer array:  ", str(answer_array))
-            print("-----------------")
-
+            current_round.add_round_results(answer, results)
+            print(current_round)
             return current_round
-
-            # print(results)
-            # RESULTS_DICT.update({answer: results})
-            # print(RESULTS_DICT)
-            # print(type(RESULTS_DICT))
-            # print(len(RESULTS_DICT))
-
-    # current_round = rounds_remaining
-    # rounds_remaining = rounds(current_round)
 
 
 def count_values(data, value):

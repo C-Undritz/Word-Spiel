@@ -19,11 +19,11 @@ class Round:
         self.win = win
         self.current_results = current_results
 
-    def add_round_results(self, value):
+    def add_round_results(self, answer, results):
         """
         Adds the current answer and results list
         """
-        self.current_results.append(value)
+        self.current_results.append({answer: results})
 
     def show(self, line):
         """

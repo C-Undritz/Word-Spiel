@@ -41,9 +41,13 @@ def start_game():
         game.add_results(round_results)
         game.increment_count(1)
         print(game)
-        return render_template("game_screen.html")
+        print(type(game))
+        print(type(round_results))
+        return render_template("game_screen.html",
+                               round=round_results,
+                               game=game)
 
-    return render_template("game_screen.html")
+    return render_template("game_screen.html", game=game)
 
 
 if __name__ == "__main__":

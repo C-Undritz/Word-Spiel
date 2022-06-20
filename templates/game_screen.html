@@ -3,6 +3,28 @@
 {% block styles %}
 
 <div id="input-boxes">
+    {% if game.round_count > 0 %}
+    {% for item in game.game_results %}
+    {% for key, value in item.current_results.items() %}
+    <form>
+        {% for number in value %}
+        {% set iteration = loop.index0 %}
+        {% if number == '3' %}
+        {% set row_class = "input-bg-green" %}
+        {% elif number == '2' %}
+        {% set row_class = "input-bg-amber" %}
+        {% else %}
+        {% set row_class = "input-bg-grey" %}
+        {% endif %}
+        <input type="text" class="{{ row_class }}" value="{{ key[iteration] }}" maxlength="1"
+            style="text-transform:uppercase">
+        {% endfor %}
+    </form>
+    {% endfor %}
+    {% endfor %}
+    {% endif %}
+</div>
+<div id="input-boxes">
     <form id="char-input-form" method="POST" action="{{ url_for('start_game') }}">
         <input type="text" class="char-input-box" id="1" name="char-1" maxlength="1" style="text-transform:uppercase">
         <input type="text" class="char-input-box" id="2" name="char-2" maxlength="1" style="text-transform:uppercase">
@@ -25,9 +47,6 @@
     {% endfor %}
     {% endfor %}
     {% endif %}
-
-
-
 </div>
 
 <a href="{{ url_for('home') }}">

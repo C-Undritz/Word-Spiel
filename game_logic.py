@@ -17,10 +17,8 @@ def determine_win(word, answer):
     correct.
     '''
     if answer == word:
-        print("You Win!")
         return True
-    else:
-        return False
+    return False
 
 
 def determine_results(word, answer):
@@ -34,58 +32,57 @@ def determine_results(word, answer):
     if not validate_word(answer):
         current_round.show(33)
         return current_round
-    else:
-        results = []
-        current_round.answer_valid = True
-        if determine_win(word, answer):
-            current_round.win = True
-            return current_round
+
+    results = []
+    current_round.answer_valid = True
+    if determine_win(word, answer):
+        current_round.win = True
+
+    # Determines characters both in the answer and word in the same
+    # position and updates the results with a '3' for each occurance.
+    word_array = []
+    answer_array = []
+    for count, letter in enumerate(answer):
+        if letter == word[count]:
+            results.insert(count, "3")
+            word_array.append("0")
+            answer_array.append("0")
         else:
-            # Determines characters both in the answer and word in the same
-            # position and updates the results with a '3' for each occurance.
-            word_array = []
-            answer_array = []
-            for count, letter in enumerate(answer):
-                if letter == word[count]:
-                    results.insert(count, "3")
-                    word_array.append("0")
-                    answer_array.append("0")
-                else:
-                    results.insert(count, "0")
-                    word_array.append(word[count])
-                    answer_array.append(answer[count])
+            results.insert(count, "0")
+            word_array.append(word[count])
+            answer_array.append(answer[count])
 
-            # Determines characters in the answer that are not in the word by
-            # checking against the word_array and updating results with a '1'
-            # for each occurance.
-            for count, character in enumerate(answer_array):
-                if character == 0 or character in word_array:
+    # Determines characters in the answer that are not in the word by
+    # checking against the word_array and updating results with a '1'
+    # for each occurance.
+    for count, character in enumerate(answer_array):
+        if character == 0 or character in word_array:
+            continue
+        results = array_update(results, count, "1")
+        answer_array = array_update(answer_array, count, "0")
+
+    # Determines characters both in the answer and word but not in the
+    # same position. Updates the results with a '2' for each occurance.
+    for count, character in enumerate(answer_array):
+        if character == '0':
+            continue
+        word_char_count = count_values(word_array, character)
+        if word_char_count > 0:
+            results = array_update(results, count, "2")
+            answer_array = array_update(answer_array, count, "0")
+            # Updates word_array value with '0' so not included in
+            # word_char_count on the next for loop.
+            for i, value in enumerate(word_array):
+                if value != character:
                     continue
-                results = array_update(results, count, "1")
-                answer_array = array_update(answer_array, count, "0")
+                word_array = array_update(word_array, i, "0")
+                break
+        else:
+            results = array_update(results, count, "1")
+            answer_array = array_update(answer_array, count, "0")
 
-            # Determines characters both in the answer and word but not in the
-            # same position. Updates the results with a '2' for each occurance.
-            for count, character in enumerate(answer_array):
-                if character == '0':
-                    continue
-                word_char_count = count_values(word_array, character)
-                if word_char_count > 0:
-                    results = array_update(results, count, "2")
-                    answer_array = array_update(answer_array, count, "0")
-                    # Updates word_array value with '0' so not included in
-                    # word_char_count on the next for loop.
-                    for i, value in enumerate(word_array):
-                        if value != character:
-                            continue
-                        word_array = array_update(word_array, i, "0")
-                        break
-                else:
-                    results = array_update(results, count, "1")
-                    answer_array = array_update(answer_array, count, "0")
-
-            current_round.add_round_results(answer, results)
-            return current_round
+    current_round.add_round_results(answer, results)
+    return current_round
 
 
 def count_values(data, value):

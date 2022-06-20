@@ -11,6 +11,23 @@
         <input type="text" class="char-input-box" id="5" name="char-5" maxlength="1" style="text-transform:uppercase">
         <button type="submit">Submit</button>
     </form>
+    {% if game.round_count > 0 %}
+    <h3>Word to guess: {{ game.word }}</h3>
+    <h3>Round: {{ game.round_count }}</h3>
+    <hs>----------------------------</hs>
+    {% for item in game.game_results %}
+    <h3>Answer valid? {{ item.answer_valid }}</h3>
+    <h3>Player win? {{ item.win }}</h3>
+    <h3>Round results: {{ item.current_results }}</h3>
+    <h3>{% for key, value in item.current_results.items() %}</h3>
+    <h4>Key: {{ key }}</h4>
+    <h4>Value: {{ value }}</h4>
+    {% endfor %}
+    {% endfor %}
+    {% endif %}
+
+
+
 </div>
 
 <a href="{{ url_for('home') }}">

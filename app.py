@@ -2,9 +2,7 @@ import os
 from flask import (
     Flask, render_template,
     redirect, request, session, url_for)
-from game_logic import (
-    determine_results,
-    validate_word, determine_win)
+from game_logic import determine_results
 from classes import Game
 if os.path.exists("env.py"):
     import env
@@ -40,12 +38,8 @@ def start_game():
         round_results = determine_results(game.word, answer)
         game.add_results(round_results)
         game.increment_count(1)
-        print(game)
-        print(type(game))
-        print(type(round_results))
-        return render_template("game_screen.html",
-                               round=round_results,
-                               game=game)
+
+        return render_template("game_screen.html", game=game)
 
     return render_template("game_screen.html", game=game)
 

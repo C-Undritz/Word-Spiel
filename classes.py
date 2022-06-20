@@ -25,15 +25,6 @@ class Round:
         """
         self.current_results.update({answer: results})
 
-    def show(self, line):
-        """
-        Prints the instatiated class current state
-        """
-        print('Line from which show called: ', line)
-        print('Valid answer: ', self.answer_valid)
-        print('Results: ', self.current_results)
-        print('Win? ', self.win)
-
     def __str__(self):
         return f"Valid answer: {self.answer_valid}. Win: {self.win}. Results: {self.current_results}"
 
@@ -81,15 +72,6 @@ class Game:
         Increments the round counter by value parameter
         """
         self.round_count += value
-
-    def show(self, line):
-        """
-        Prints the instatiated class current state
-        """
-        print('Line from which show called: ', line)
-        print('Word: ', self.word)
-        print('Round count: ', self.round_count)
-        print('Game results: ', self.game_results)
 
     def __str__(self):
         return f"Word: {self.word}. Round count: {self.round_count}. Game results: {self.game_results}"

@@ -29,7 +29,7 @@ def determine_results(word, answer):
     Instantiates an instance of the Round class and determines the values for
     each attribute of the class
     '''
-    current_round = Round(False, False, [])
+    current_round = Round(False, False, {})
 
     if not validate_word(answer):
         current_round.show(33)
@@ -74,7 +74,7 @@ def determine_results(word, answer):
                     results = array_update(results, count, "2")
                     answer_array = array_update(answer_array, count, "0")
                     # Updates word_array value with '0' so not included in
-                    # word_char_count
+                    # word_char_count on the next for loop.
                     for i, value in enumerate(word_array):
                         if value != character:
                             continue
@@ -85,7 +85,6 @@ def determine_results(word, answer):
                     answer_array = array_update(answer_array, count, "0")
 
             current_round.add_round_results(answer, results)
-            print(current_round)
             return current_round
 
 

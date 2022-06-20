@@ -23,7 +23,7 @@ class Round:
         """
         Adds the current answer and results list
         """
-        self.current_results.append({answer: results})
+        self.current_results.update({answer: results})
 
     def show(self, line):
         """
@@ -68,13 +68,6 @@ class Game:
             return word
         else:
             self.generate_word()
-
-    # def add_results(self, answer, results):
-    #     """
-    #     Adds the results dictionary with each round guess and results
-    #     against each letter in the player guess
-    #     """
-    #     self.game_results.append({answer: results})
 
     def add_results(self, value):
         """

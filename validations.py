@@ -1,3 +1,7 @@
+'''
+Validates word generated to guess and also the word entered by the player.
+Functions held here to prevent import loops.
+'''
 import os
 import requests
 if os.path.exists("env.py"):

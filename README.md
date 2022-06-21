@@ -39,6 +39,6 @@ Used [rapidapi.com](https://rapidapi.com/hub) to access the APIs used below:
 ># **CREDIT & THANKS**
 # Code
 - [How to share global variables between files in Python](https://instructobit.com/tutorial/108/How-to-share-global-variables-between-files-in-Python)
-
+- [How to reset a class](https://stackoverflow.com/questions/45798899/preferred-way-of-resetting-a-class-in-python)
 
 

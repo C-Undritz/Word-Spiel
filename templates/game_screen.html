@@ -36,6 +36,7 @@
     {% if game.round_count > 0 %}
     <h3>Word to guess: {{ game.word }}</h3>
     <h3>Round: {{ game.round_count }}</h3>
+    <h3>Win? {{ game.win }}</h3>
     <hs>----------------------------</hs>
     {% for item in game.game_results %}
     <h3>Answer valid? {{ item.answer_valid }}</h3>
@@ -52,6 +53,10 @@
 <a href="{{ url_for('home') }}">
     Quit
 </a>
+
+<form action="{{ url_for('play_again') }}" method="post">
+    <button type="submit">Play again?</button>
+</form>
 
 {% endblock %}
 {% block scripts %}

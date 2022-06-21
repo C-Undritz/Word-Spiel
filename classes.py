@@ -33,10 +33,11 @@ class Game:
     """
     Game class to manage the variables and states of each full game played.
     """
-    def __init__(self, round_count, game_results):
+    def __init__(self, round_count, game_results, win):
         self.word = self.generate_word()
         self.round_count = round_count
         self.game_results = game_results
+        self.win = win
 
     def generate_word(self):
         """
@@ -72,6 +73,20 @@ class Game:
         Increments the round counter by value parameter
         """
         self.round_count += value
+
+    def determine_win(self, value):
+        """
+        (*possibly not needed) Sets the win status to True is the round win is
+        true
+        """
+        if value:
+            self.win = True
+
+    def reset(self):
+        """
+        Resets the instantiated Game class.
+        """
+        self.__init__(0, [], False)
 
     def __str__(self):
         return f"Word: {self.word}. Round count: {self.round_count}. Game results: {self.game_results}"

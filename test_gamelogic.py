@@ -1,5 +1,5 @@
 """
-Required unit tests using pytest
+Required unit tests using pytest for game_logic.py
 """
 import pytest
 from game_logic import determine_results
@@ -10,6 +10,7 @@ from game_logic import determine_results
     ('ready', 'early', {'early': ['2', '2', '2', '1', '3']}),
     ('teeth', 'reach', {'reach': ['1', '3', '1', '1', '3']}),
     ('teeth', 'teach', {'teach': ['3', '3', '1', '1', '3']}),
+    ('abbde', 'bbaec', {'bbaec': ['2', '3', '2', '2', '1']})
 ])
 def test_result_current_results(word, answer, expected):
     """

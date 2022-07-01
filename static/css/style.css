@@ -7,16 +7,26 @@
 
 html,
 body {
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    background-color: var(--white);
 }
+
+.container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.row {
+    justify-content: center;
+}
+
 
 /*--- button styles ---*/
 
 .anchor-btn {
-    width: 15%;
     appearance: none;
-    /* background-color: transparent; */
     border: 2px solid var(--red);
     border-radius: 0.6em;
     color: var(--red);
@@ -52,7 +62,6 @@ body {
     box-shadow: 0 0 10px 0 var(--blue) inset, 0 0 10px 4px var(--blue);
     color: var(--blue);
 }
-
 
 
 /*--- input field styles ---*/

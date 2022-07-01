@@ -1,10 +1,13 @@
 {% extends "base.html" %}
 
 {% block styles %}
-
-<a class="anchor-btn" id="btn-animation" href="{{ url_for('start_game') }}">
-    Start
-</a>
+<div class="container">
+    <div class="row">
+        <a class="anchor-btn" id="btn-animation" href="{{ url_for('start_game') }}">
+            Start
+        </a>
+    </div>
+</div>
 
 {% endblock %}
 {% block scripts %}

@@ -37,6 +37,7 @@ Used [rapidapi.com](https://rapidapi.com/hub) to access the APIs used below:
 - An instance of the Game class is instantiated at the top of the app.py file so that it is accessible to all functions within that file.  However because of this it was not initially known how to recreate this class as required between rounds or should the user quit a game and then restart.  This was solved by adding a 'reset' method to the Game class as suggested in the stackover post [here](https://stackoverflow.com/questions/45798899/preferred-way-of-resetting-a-class-in-python).  This method can then be called at any point as required to wipe the current data from the class for a new game to be started.
 
 ># **REFERENCES**
+- CSS background adapted from codepen by [TokyoWeb](https://codepen.io/tokyoweb/pen/ZjdYVj)
 
 ># **CREDIT & THANKS**
 # Code

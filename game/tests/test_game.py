@@ -2,7 +2,7 @@
 Required unit tests using pytest for game_logic.py
 """
 import pytest
-from game_logic import determine_results
+from game import game_logic
 
 
 @pytest.mark.parametrize("word,answer,expected", [
@@ -17,5 +17,5 @@ def test_result_current_results(word, answer, expected):
     Tests the results returned from a round based on a given answer against a
     set word.
     """
-    returned_result = determine_results(word, answer)
+    returned_result = game_logic.determine_results(word, answer)
     assert returned_result.current_results == expected

@@ -2,8 +2,8 @@ import os
 from flask import (
     Flask, render_template,
     redirect, request, session, url_for)
-from game_logic import determine_results
-from classes import Game
+from game.classes import Game
+from game.game_logic import determine_results
 if os.path.exists("env.py"):
     import env
 

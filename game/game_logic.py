@@ -1,9 +1,9 @@
 '''
-Module that Works out the current round results.
+Works out the current round results.
 '''
 import os
-from classes import Round
-from validations import validate_word
+from game.validations import validate_word
+from game.classes import Round
 if os.path.exists("env.py"):
     import env
 

@@ -3,7 +3,7 @@ Classes required for the game
 """
 import os
 import requests
-from validations import validate_word
+from game.validations import validate_word
 if os.path.exists("env.py"):
     import env
 

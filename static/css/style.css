@@ -1,12 +1,20 @@
 @import url('https://fonts.googleapis.com/css?family=Exo:400,700');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap');
 
 :root {
     --blue: #3498db;
+    --navy: #2532A6;
     --red: #e74c3c;
     --white: #ffffff;
     --black: #000000;
     --yellow: #ffc107;
+    --green: #7AA86B;
+    --orange: #FFA54A;
+    --grey: #C0C0C0;
+    --darkgrey: #606060;
     --startbutton: var(--yellow);
+    --background: var(--navy);
 }
 
 * {
@@ -17,7 +25,7 @@
 html,
 body {
     height: 100vh;
-    font-family: 'Exo', sans-serif;
+    font-family: 'Fredoka One', cursive;
 }
 
 .container {
@@ -34,7 +42,11 @@ body {
     position: relative;
     z-index: 100;
     color: #fff;
-    font-size: 50px;
+    font-size: 100px;
+}
+
+#black-background {
+    background-color: var(--yellow);
 }
 
 /*--- button styles ---*/
@@ -54,8 +66,8 @@ body {
     text-decoration: none;
     text-align: center;
     text-transform: uppercase;
-    font-family: 'Montserrat', sans-serif;
     font-weight: 700;
+    font-family: 'Lato', sans-serif;
     z-index: 1;
 }
 
@@ -80,7 +92,7 @@ body {
 /*--- landing page background ---*/
 
 .area {
-    background: black;
+    background: var(--background);
     width: 100%;
     height: 100vh;
 }
@@ -109,7 +121,7 @@ body {
     left: 25%;
     width: 80px;
     height: 80px;
-    background: rgba(255, 165, 74, 1);
+    background: var(--orange);
     animation-delay: 0s;
 }
 
@@ -117,7 +129,7 @@ body {
     left: 10%;
     width: 20px;
     height: 20px;
-    background: rgba(255, 165, 74, 1);
+    background: var(--orange);
     animation-delay: 2s;
     animation-duration: 12s;
 }
@@ -126,7 +138,7 @@ body {
     left: 70%;
     width: 20px;
     height: 20px;
-    background: rgba(192, 192, 192, 1);
+    background: var(--grey);
     animation-delay: 4s;
 }
 
@@ -134,7 +146,7 @@ body {
     left: 40%;
     width: 60px;
     height: 60px;
-    background: rgba(192, 192, 192, 1);
+    background: var(--grey);
     animation-delay: 0s;
     animation-duration: 18s;
 }
@@ -143,7 +155,7 @@ body {
     left: 65%;
     width: 20px;
     height: 20px;
-    background: rgba(122, 168, 107, 1);
+    background: var(--green);
     animation-delay: 0s;
 }
 
@@ -151,7 +163,7 @@ body {
     left: 75%;
     width: 110px;
     height: 110px;
-    background: rgba(122, 168, 107, 1);
+    background: var(--green);
     animation-delay: 3s;
 }
 
@@ -159,7 +171,7 @@ body {
     left: 35%;
     width: 150px;
     height: 150px;
-    background: rgba(122, 168, 107, 1);
+    background: var(--green);
     animation-delay: 7s;
 }
 
@@ -167,7 +179,7 @@ body {
     left: 50%;
     width: 25px;
     height: 25px;
-    background: rgba(122, 168, 107, 1);
+    background: var(--green);
     animation-delay: 15s;
     animation-duration: 45s;
 }
@@ -176,7 +188,7 @@ body {
     left: 20%;
     width: 15px;
     height: 15px;
-    background: rgba(192, 192, 192, 1);
+    background: var(--grey);
     animation-delay: 2s;
     animation-duration: 35s;
 }
@@ -185,7 +197,7 @@ body {
     left: 85%;
     width: 150px;
     height: 150px;
-    background: rgba(255, 165, 74, 1);
+    background: var(--orange);
     animation-delay: 0s;
     animation-duration: 11s;
 }
@@ -205,23 +217,38 @@ body {
 
 /*--- input field styles ---*/
 
-.input-bg-green,
-.input-bg-amber,
-.input-bg-grey,
-.char-input-box {
-    width: 2.5%;
+input {
+    width: 50px;
+    height: 50px;
     padding: 5px;
-    margin: 3px;
+    margin: 5px;
+    font-size: xxx-large;
+    font-family: 'Fredoka One', cursive;
+    text-align: center;
+    border-style: none;
+    border-radius: 5%;
+}
+
+#output-boxes {
+    flex-direction: column;
+}
+
+#output-boxes form,
+#input-boxes,
+#input-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .input-bg-green {
-    background-color: #7AA86B;
+    background-color: var(--green);
 }
 
 .input-bg-amber {
-    background-color: #FFA54A;
+    background-color: var(--orange);
 }
 
 .input-bg-grey {
-    background-color: #C0C0C0;
+    background-color: var(--grey);
 }

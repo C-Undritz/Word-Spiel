@@ -13,7 +13,7 @@
     --orange: #FFA54A;
     --grey: #C0C0C0;
     --darkgrey: #606060;
-    --startbutton: var(--yellow);
+    --navbutton: var(--yellow);
     --background: var(--navy);
 }
 
@@ -41,18 +41,18 @@ body {
 #title h1 {
     position: relative;
     z-index: 100;
-    color: #fff;
+    color: var(--white);
     font-size: 100px;
     text-align: center;
 }
 
-#black-background {
-    background-color: var(--yellow);
-}
-
 /*--- button styles ---*/
 
-.anchor-btn {
+#menu-btn {
+    position: relative;
+}
+
+.stn-btn {
     position: relative;
     appearance: none;
     border: 2px solid;
@@ -72,22 +72,17 @@ body {
     z-index: 1;
 }
 
-.anchor-btn:hover,
-.anchor-btn:focus {
-    color: #fff;
-    outline: 0;
-}
-
-#btn-animation {
-    border-color: var(--startbutton);
+.btn-animation {
+    border-color: var(--navbutton);
     color: var(--black);
-    box-shadow: 0 0 40px 40px var(--startbutton) inset, 0 0 0 0 var(--startbutton);
+    background-color: var(--navy);
+    box-shadow: 0 0 40px 40px var(--navbutton) inset, 0 0 0 0 var(--navbutton);
     transition: all 150ms ease-in-out;
 }
 
-#btn-animation:hover {
-    box-shadow: 0 0 10px 0 var(--startbutton) inset, 0 0 10px 4px var(--startbutton);
-    color: var(--startbutton);
+.btn-animation:hover {
+    box-shadow: 0 0 10px 0 var(--navbutton) inset, 0 0 10px 4px var(--navbutton);
+    color: var(--navbutton);
 }
 
 /*--- landing page background ---*/
@@ -238,7 +233,6 @@ input {
 #input-boxes,
 #input-submit {
     display: flex;
-    align-items: center;
     justify-content: center;
 }
 

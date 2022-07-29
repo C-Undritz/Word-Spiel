@@ -13,7 +13,7 @@ rapidapi_key = os.environ.get("RAPIDAPI_KEY")
 game = Game(0, [], False)
 
 
-# @app.route("/")
+@app.route("/")
 @app.route("/home")
 def home():
     """

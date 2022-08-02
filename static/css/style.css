@@ -28,7 +28,7 @@ body {
     font-family: 'Fredoka One', cursive;
 }
 
-.container {
+#container {
     position: absolute;
     height: 100vh;
     width: 100%;
@@ -36,6 +36,25 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+#game-container {
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: var(--background);
+}
+
+#nav_btns {
+    height: 10vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--background);
 }
 
 #title h1 {
@@ -62,8 +81,8 @@ body {
     align-self: center;
     font-size: 1rem;
     line-height: 1;
-    margin: 20px;
-    padding: 1.2em 2.8em;
+    margin: 10px 5px;
+    padding: 0.8em 1.8em;
     text-decoration: none;
     text-align: center;
     text-transform: uppercase;

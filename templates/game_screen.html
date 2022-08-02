@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 
 {% block styles %}
-<div class="container area">
 
+<div id="game-container">
+
+    <!-- Displays past guesses with hints against each letter entered on that round -->
     <div id="output-boxes">
         {% if game.round_count > 0 %}
         {% for item in game.game_results %}
@@ -25,6 +27,8 @@
         {% endfor %}
         {% endif %}
     </div>
+
+    <!-- displays input boxes to add letter for word guess -->
     <div id="user-input">
         <form id="char-input-form" method="POST" action="{{ url_for('start_game') }}">
             <div id="input-boxes">
@@ -44,14 +48,18 @@
             </div>
         </form>
     </div>
+</div>
 
+<!-- Buttons to quit to menu and play again -->
+<div id="nav_btns">
     <a href="{{ url_for('home') }}">
-        Quit
+        <button class="stn-btn btn-animation" type="submit">Quit</button>
     </a>
     <form action="{{ url_for('play_again') }}" method="post">
-        <button type="submit">Play again?</button>
+        <button class="stn-btn btn-animation" type="submit">Play Again?</button>
     </form>
 </div>
+
 
 
 {% endblock %}

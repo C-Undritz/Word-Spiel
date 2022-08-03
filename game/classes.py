@@ -43,19 +43,19 @@ class Game:
         """
         Generates a random word for the player to guess.
         """
-        url = "https://random-words5.p.rapidapi.com/getMultipleRandom"
-        querystring = {
-            "count": "1",
-            "wordLength": "5"
-        }
-        headers = {
-            "X-RapidAPI-Host": "random-words5.p.rapidapi.com",
-            "X-RapidAPI-Key": rapidapi_key
-        }
+        # url = "https://random-words5.p.rapidapi.com/getMultipleRandom"
+        # querystring = {
+        #     "count": "1",
+        #     "wordLength": "5"
+        # }
+        # headers = {
+        #     "X-RapidAPI-Host": "random-words5.p.rapidapi.com",
+        #     "X-RapidAPI-Key": rapidapi_key
+        # }
 
-        response = requests.request("GET", url, headers=headers, params=querystring)
-        word = response.text[2:-2]
-        # word = "abcda"
+        # response = requests.request("GET", url, headers=headers, params=querystring)
+        # word = response.text[2:-2]
+        word = "abcda"
         if validate_word(word):
             return word
         else:
@@ -86,7 +86,7 @@ class Game:
         """
         Resets the instantiated Game class.
         """
-        self.__init__(0, [], False)
+        self.__init__(1, [], False)
 
     def __str__(self):
         return f"Word: {self.word}. Round count: {self.round_count}. Game results: {self.game_results}"

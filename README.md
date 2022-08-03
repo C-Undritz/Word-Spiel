@@ -38,10 +38,13 @@ Used [rapidapi.com](https://rapidapi.com/hub) to access the APIs used below:
 
 ># **REFERENCES**
 - CSS background adapted from codepen by [TokyoWeb](https://codepen.io/tokyoweb/pen/ZjdYVj)
+- bespoke modal was created using the [w3schools guide](https://www.w3schools.com/howto/howto_css_modals.asp) 
+
 
 ># **CREDIT & THANKS**
 # Code
 - [How to share global variables between files in Python](https://instructobit.com/tutorial/108/How-to-share-global-variables-between-files-in-Python)
 - [How to reset a class](https://stackoverflow.com/questions/45798899/preferred-way-of-resetting-a-class-in-python)
+- [How to count the number of elements in a parent](https://www.geeksforgeeks.org/html-dom-childelementcount-property/)
 
 

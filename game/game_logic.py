@@ -30,7 +30,6 @@ def determine_results(word, answer):
     current_round = Round(False, False, {})
 
     if not validate_word(answer):
-        current_round.show(33)
         return current_round
 
     results = []

@@ -47,6 +47,20 @@
                 <button class="stn-btn btn-animation" type="submit" id="submit_btn">Submit</button>
             </div>
         </form>
+
+        <!-- displays feedback messages to user -->
+        <div>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <div class="flashes">
+                <p class="center-align">{{ message }}</p>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
+
     </div>
 
     <!-- The Modal -->
@@ -58,7 +72,6 @@
         </div>
     </div>
 
-    <!-- <div id="round_count">{{ game.round_count }}</div> -->
 </div>
 
 <!-- Buttons to quit to menu and play again -->
@@ -70,8 +83,6 @@
         <button class="stn-btn btn-animation" type="submit">Play Again?</button>
     </form>
 </div>
-
-
 
 {% endblock %}
 {% block scripts %}

@@ -16,6 +16,8 @@ def validate_word(value):
     Takes the word generated or entered by user to check that it is a valid
     word using wordsapi.
     '''
+    if len(value) != 5:
+        return False
     # url = "https://wordsapiv1.p.rapidapi.com/words/" + value + "/typeOf"
 
     # headers = {

@@ -35,6 +35,13 @@ Used [rapidapi.com](https://rapidapi.com/hub) to access the APIs used below:
 
 ># **ISSUES & FIXES**
 - An instance of the Game class is instantiated at the top of the app.py file so that it is accessible to all functions within that file.  However because of this it was not initially known how to recreate this class as required between rounds or should the user quit a game and then restart.  This was solved by adding a 'reset' method to the Game class as suggested in the stackover post [here](https://stackoverflow.com/questions/45798899/preferred-way-of-resetting-a-class-in-python).  This method can then be called at any point as required to wipe the current data from the class for a new game to be started.
+- The initial deployment to Heroku resulted in an H10 error:
+![database_schema](assets/readme/heroku_H10_error.png)  
+Investigating the heroku logs, the error below was displayed:  
+![database_schema](assets/readme/heroku_no-module-found.png)  
+Within the IDE terminal it was determined that whilst the 'requests' module was installed, it was not showing up on the pip freeze command:  
+![database_schema](assets/readme/requests_pip-state.png)  
+Therefore to fix it 'requests == 2.27.1' was manually added to the requirements.txt file and then redeployed to heroku.  Thanks to jo_ci for help with this!
 
 ># **REFERENCES**
 - CSS background adapted from codepen by [TokyoWeb](https://codepen.io/tokyoweb/pen/ZjdYVj)

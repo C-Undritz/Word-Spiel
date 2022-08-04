@@ -89,4 +89,4 @@ class Game:
         self.__init__(1, [], False)
 
     def __str__(self):
-        return f"Word: {self.word}. Round count: {self.round_count}. Game results: {self.game_results}"
+        return f"Word: {self.word}. Round count: {self.round_count}. Win: {self.win}. Game results: {self.game_results}"

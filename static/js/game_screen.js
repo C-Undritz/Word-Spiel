@@ -46,10 +46,6 @@ let roundCount = document.getElementById("output-boxes").childElementCount;
 When five output displays are shown and now win, modal displays and input disappears so as to disable 
 further guesses.
 */
-
-console.log(win);
-console.log(typeof win);
-
 if (roundCount == 5 || win == "True") {
   modal.style.display = "block";
   input.style.display = "none";

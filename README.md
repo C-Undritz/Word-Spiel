@@ -27,6 +27,28 @@ Like actual Wordle, the player is asked to guess a word by typing in a word and 
 
 ># **TECHNOLOGIES USED**
 
+## Languages
+* HTML5
+* CSS3
+* JavaScript 
+* Python
+
+## Libraries & Frameworks
+* [Flask web application framework](https://flask.palletsprojects.com/en/2.0.x/)
+* [Jinja template engine for Python](https://jinja.palletsprojects.com/en/3.0.x/)
+* Werkzeug [WSGI](https://wsgi.readthedocs.io/en/latest/) web application library
+* [Pytest](https://docs.pytest.org/en/7.1.x/)
+* [Requests](https://pypi.org/project/requests/)
+* [Google Fonts](https://fonts.google.com/)
+
+## Tools
+* [Gitpod](https://www.gitpod.io/) - chosen IDE for this project.
+* [GitHub](https://github.com) - for storage and sharing of code remotely.
+* [Heroku](https://www.heroku.com/) - Hosting provider for app.
+* [Balsamiq](https://balsamiq.com/) - to create wireframes.
+* [favicon](https://favicon.io/) - for generating 32x32 favicon.
+* [Am I responsive](http://ami.responsivedesign.is/) - to create the responsive illustrations featured in the TESTING.md.
+
 ## APIs
 Used [rapidapi.com](https://rapidapi.com/hub) to access the APIs used below:
 

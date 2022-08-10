@@ -288,7 +288,16 @@ input {
     margin: 15% auto;
     padding: 20px;
     border: var(--background);
-    width: 50%;
+    width: 20%;
+}
+
+.modal-content p {
+    font-size: large;
+    padding-top: 5px;
+}
+
+.revealed-word {
+    text-transform: uppercase;
 }
 
 .close {

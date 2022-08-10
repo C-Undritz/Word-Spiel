@@ -97,9 +97,17 @@
     <div class="modal-content">
       <span class="close">&times;</span>
       {% if game.win == True %}
-      <p>Well done, you have correctly guessed!</p>
+      <h1>Well done!</h1>
+      <p>
+        You have correctly guessed
+        <span class="revealed-word">{{ game.word }}</span>.
+      </p>
       {% else %}
-      <p>Out of guesses! The word you were looking for is {{ game.word }}</p>
+      <h1>Out of guesses!</h1>
+      <p>
+        The word you were looking for is
+        <span class="revealed-word">{{ game.word }}</span>.
+      </p>
       {% endif%}
     </div>
   </div>

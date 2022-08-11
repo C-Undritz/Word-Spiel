@@ -267,7 +267,15 @@ input {
     background-color: var(--grey);
 }
 
-/*--- Modal styles ---*/
+/*--- Flash messages ---*/
+
+.flashes p {
+    font-size: large;
+    color: white;
+    text-align: center;
+}
+
+/*--- Modal ---*/
 
 .modal {
     display: none;

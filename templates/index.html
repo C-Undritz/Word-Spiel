@@ -1,34 +1,35 @@
-{% extends "base.html" %}
-
-{% block styles %}
+{% extends "base.html" %} {% block styles %}
 
 <div id="container">
-    <div id="title">
-        <h1>Word Spiel</h1>
-    </div>
-    <div id="button-menu">
-        <a class="stn-btn btn-animation" id="menu-btn" href="{{ url_for('start_game') }}">
-            Start
-        </a>
-    </div>
+  <div id="title">
+    <h1>Word Spiel</h1>
+  </div>
+  <div id="button-menu">
+    <a
+      class="stn-btn btn-animation"
+      id="menu-btn"
+      href="{{ url_for('start_game') }}"
+    >
+      Start
+    </a>
+  </div>
 </div>
 
 <div class="area">
-    <ul class="circles">
-        <li>A</li>
-        <li>G</li>
-        <li>B</li>
-        <li>M</li>
-        <li>D</li>
-        <li>T</li>
-        <li>Y</li>
-        <li>G</li>
-        <li>P</li>
-        <li>F</li>
-    </ul>
+  <ul class="circles">
+    <li>A</li>
+    <li>W</li>
+    <li>B</li>
+    <li>M</li>
+    <li>D</li>
+    <li>T</li>
+    <li>Y</li>
+    <li>G</li>
+    <li>P</li>
+    <li>F</li>
+    <li>E</li>
+    <li>J</li>
+  </ul>
 </div>
 
-{% endblock %}
-{% block scripts %}
-
-{% endblock %}
+{% endblock %} {% block scripts %} {% endblock %}

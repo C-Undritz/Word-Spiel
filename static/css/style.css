@@ -240,18 +240,20 @@ body {
     height: 80px;
     background: var(--grey);
     animation-delay: 0s;
-    animation-duration: 11s;
+    animation-duration: 15s;
     font-size: 380%;
 }
 
 @keyframes animate {
     0% {
         transform: translateY(0) rotate(0deg);
+        opacity: 1;
         border-radius: 10%;
     }
 
     100% {
         transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
     }
 }
 

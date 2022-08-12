@@ -348,3 +348,30 @@ input {
     text-decoration: none;
     cursor: pointer;
 }
+
+/* ------ Media Queries ------ */
+@media only screen and (max-width: 992px) {
+    .modal-content {
+        width: 40%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .modal-content {
+        width: 60%;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .modal-content {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    input {
+        width: 45px;
+        height: 45px;
+        margin: 4px;
+    }
+}

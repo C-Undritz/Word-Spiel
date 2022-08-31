@@ -27,7 +27,7 @@ def determine_results(word, answer):
     Instantiates an instance of the Round class and determines the values for
     each attribute of the class
     '''
-    current_round = Round(False, False, {})
+    current_round = Round(False, False, {}, [])
 
     if not validate_word(answer):
         return current_round
@@ -81,7 +81,28 @@ def determine_results(word, answer):
             answer_array = array_update(answer_array, count, "0")
 
     current_round.add_round_results(answer, results)
+    current_round.add_round_hints(hints(answer, results))
     return current_round
+
+
+def hints(answer, results):
+    '''
+    Creates a dictionary of each letter used in the guess along with the
+    returned results value.  This will be used to update the hints list in the
+    game class instance.
+    '''
+    hints_dict = {}
+
+    for count, character in enumerate(answer):
+        if character in hints_dict:
+            value = hints_dict[character]
+            if value == 1:
+                continue
+            hints_dict.update({character: [value, results[count]]})
+        else:
+            hints_dict.update({character: results[count]})
+
+    return hints_dict
 
 
 def count_values(data, value):

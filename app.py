@@ -22,7 +22,7 @@ def home():
     user quit to the start screen during a game.
     """
     game.reset()
-    print(game)
+    # print(game)
     return render_template("index.html")
 
 
@@ -40,7 +40,7 @@ def start_game():
             i += 1
 
         round_results = determine_results(game.word, answer)
-        print(round_results)
+        print(f'The round results are: {round_results}')
 
         # Only increments round cound if answer is valid
         if round_results.answer_valid:
@@ -50,7 +50,6 @@ def start_game():
 
         game.add_results(round_results)
         game.determine_win(round_results.win)
-        print(game)
         return render_template("game_screen.html", game=game)
 
     return render_template("game_screen.html", game=game)
@@ -64,7 +63,7 @@ def play_again():
     '''
     if request.method == "POST":
         game.reset()
-        print(game)
+        # print(game)
         return redirect(url_for("start_game"))
 
 

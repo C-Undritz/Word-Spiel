@@ -14,10 +14,11 @@ class Round:
     """
     Round class to manage the variables and states of each round played.
     """
-    def __init__(self, answer_valid, win, current_results):
+    def __init__(self, answer_valid, win, current_results, current_hints):
         self.answer_valid = answer_valid
         self.win = win
         self.current_results = current_results
+        self.current_hints = current_hints
 
     def add_round_results(self, answer, results):
         """
@@ -25,8 +26,14 @@ class Round:
         """
         self.current_results.update({answer: results})
 
+    def add_round_hints(self, hints):
+        """
+        Adds the current hints dictionary
+        """
+        self.current_hints.append(hints)
+
     def __str__(self):
-        return f"Valid answer: {self.answer_valid}. Win: {self.win}. Results: {self.current_results}"
+        return f"Valid answer: {self.answer_valid}. Win: {self.win}. Results: {self.current_results}. Hints: {self.current_hints}"
 
 
 class Game:
@@ -43,19 +50,19 @@ class Game:
         """
         Generates a random word for the player to guess.
         """
-        url = "https://random-words5.p.rapidapi.com/getMultipleRandom"
-        querystring = {
-            "count": "1",
-            "wordLength": "5"
-        }
-        headers = {
-            "X-RapidAPI-Host": "random-words5.p.rapidapi.com",
-            "X-RapidAPI-Key": rapidapi_key
-        }
+        # url = "https://random-words5.p.rapidapi.com/getMultipleRandom"
+        # querystring = {
+        #     "count": "1",
+        #     "wordLength": "5"
+        # }
+        # headers = {
+        #     "X-RapidAPI-Host": "random-words5.p.rapidapi.com",
+        #     "X-RapidAPI-Key": rapidapi_key
+        # }
 
-        response = requests.request("GET", url, headers=headers, params=querystring)
-        word = response.text[2:-2]
-        # word = "abcda"
+        # response = requests.request("GET", url, headers=headers, params=querystring)
+        # word = response.text[2:-2]
+        word = "hello"
         if validate_word(word):
             return word
         else:

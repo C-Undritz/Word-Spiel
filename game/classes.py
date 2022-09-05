@@ -40,10 +40,11 @@ class Game:
     """
     Game class to manage the variables and states of each full game played.
     """
-    def __init__(self, round_count, game_results, win):
+    def __init__(self, round_count, game_results, game_hints, win):
         self.word = self.generate_word()
         self.round_count = round_count
         self.game_results = game_results
+        self.game_hints = game_hints
         self.win = win
 
     def generate_word(self):
@@ -62,7 +63,7 @@ class Game:
 
         # response = requests.request("GET", url, headers=headers, params=querystring)
         # word = response.text[2:-2]
-        word = "hello"
+        word = "mamma"
         if validate_word(word):
             return word
         else:
@@ -81,6 +82,29 @@ class Game:
         """
         self.round_count += value
 
+    def update_hints(self, item):
+        """
+        Updates the ongoing hints against each letter in all guesses within a
+        game.  The first value in the value list is the fill colour of the
+        letter background and the second is the border colour.
+        """
+        dict_item = item[0]
+        for key, value in dict_item.items():
+            if len(value) == 1:
+                if value[0] == 1:
+                    self.game_hints.update({key: ['grey', 'grey']})
+                elif value[0] == 2:
+                    self.game_hints.update({key: ['orange', 'orange']})
+                elif value[0] == 3:
+                    self.game_hints.update({key: ['green', 'green']})
+            else:
+                if sum(value) in (5, 7, 8):
+                    self.game_hints.update({key: ['green', 'orange']})
+                elif sum(value) == 4:
+                    self.game_hints.update({key: ['orange', 'orange']})
+                else:
+                    self.game_hints.update({key: ['green', 'green']})
+
     def determine_win(self, value):
         """
         (*possibly not needed) Sets the win status to True is the round win is
@@ -93,7 +117,7 @@ class Game:
         """
         Resets the instantiated Game class.
         """
-        self.__init__(1, [], False)
+        self.__init__(1, [], {}, False)
 
     def __str__(self):
-        return f"Word: {self.word}. Round count: {self.round_count}. Win: {self.win}. Game results: {self.game_results}"
+        return f"Word: {self.word}. Round count: {self.round_count}. Win: {self.win}. Game results: {self.game_results}. Game hints: {self.game_hints}"

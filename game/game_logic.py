@@ -96,11 +96,16 @@ def hints(answer, results):
     for count, character in enumerate(answer):
         if character in hints_dict:
             value = hints_dict[character]
-            if value == 1:
+            if value[0] == 1 or results[count] == '1':
+                # Ensures that values of 1 will only appear once or not at all
+                # they are after a 2 or 3
                 continue
-            hints_dict.update({character: [value, results[count]]})
+            value.append(int(results[count]))
+            hints_dict.update({character: value})
         else:
-            hints_dict.update({character: results[count]})
+            entry = []
+            entry.append(int(results[count]))
+            hints_dict.update({character: entry})
 
     return hints_dict
 

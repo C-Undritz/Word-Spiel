@@ -11,7 +11,7 @@ if os.path.exists("env.py"):
 app = Flask(__name__)
 rapidapi_key = os.environ.get("RAPIDAPI_KEY")
 app.secret_key = os.environ.get("SECRET_KEY")
-game = Game(1, [], False)
+game = Game(1, [], {}, False)
 
 
 @app.route("/")
@@ -22,7 +22,6 @@ def home():
     user quit to the start screen during a game.
     """
     game.reset()
-    # print(game)
     return render_template("index.html")
 
 
@@ -45,6 +44,7 @@ def start_game():
         # Only increments round cound if answer is valid
         if round_results.answer_valid:
             game.increment_count(1)
+            game.update_hints(round_results.current_hints)
         else:
             flash("Please enter a valid five letter word!")
 
@@ -63,7 +63,6 @@ def play_again():
     '''
     if request.method == "POST":
         game.reset()
-        # print(game)
         return redirect(url_for("start_game"))
 
 

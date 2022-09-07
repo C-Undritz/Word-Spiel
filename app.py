@@ -1,6 +1,6 @@
 import os
 from flask import (
-    Flask, render_template, flash, 
+    Flask, render_template, flash,
     redirect, request, url_for)
 from game.classes import Game
 from game.game_logic import determine_results
@@ -22,6 +22,7 @@ def home():
     user quit to the start screen during a game.
     """
     game.reset()
+    print(f'New game object: {game}')
     return render_template("index.html")
 
 
@@ -50,6 +51,7 @@ def start_game():
 
         game.add_results(round_results)
         game.determine_win(round_results.win)
+        print(f'Updated game object: {game}')
         return render_template("game_screen.html", game=game)
 
     return render_template("game_screen.html", game=game)

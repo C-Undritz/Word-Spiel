@@ -2,7 +2,7 @@
 Works out the current round results.
 '''
 import os
-from game.validations import validate_word
+from game.tools import validate_word
 from game.classes import Round
 if os.path.exists("env.py"):
     import env

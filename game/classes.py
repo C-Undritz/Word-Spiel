@@ -3,7 +3,7 @@ Classes required for the game
 """
 import os
 import requests
-from game.validations import validate_word
+from game.tools import validate_word, alpha_dict
 if os.path.exists("env.py"):
     import env
 
@@ -63,7 +63,7 @@ class Game:
 
         # response = requests.request("GET", url, headers=headers, params=querystring)
         # word = response.text[2:-2]
-        word = "mamma"
+        word = "hello"
         if validate_word(word):
             return word
         else:
@@ -92,18 +92,18 @@ class Game:
         for key, value in dict_item.items():
             if len(value) == 1:
                 if value[0] == 1:
-                    self.game_hints.update({key: ['grey', 'grey']})
+                    self.game_hints.update({key: 'grey'})
                 elif value[0] == 2:
-                    self.game_hints.update({key: ['orange', 'orange']})
+                    self.game_hints.update({key: 'orange'})
                 elif value[0] == 3:
-                    self.game_hints.update({key: ['green', 'green']})
+                    self.game_hints.update({key: 'green'})
             else:
                 if sum(value) in (5, 7, 8):
-                    self.game_hints.update({key: ['green', 'orange']})
+                    self.game_hints.update({key: 'mixed'})
                 elif sum(value) == 4:
-                    self.game_hints.update({key: ['orange', 'orange']})
+                    self.game_hints.update({key: 'orange'})
                 else:
-                    self.game_hints.update({key: ['green', 'green']})
+                    self.game_hints.update({key: 'green'})
 
     def determine_win(self, value):
         """
@@ -117,7 +117,7 @@ class Game:
         """
         Resets the instantiated Game class.
         """
-        self.__init__(1, [], {}, False)
+        self.__init__(1, [], alpha_dict(), False)
 
     def __str__(self):
         return f"Word: {self.word}. Round count: {self.round_count}. Win: {self.win}. Game results: {self.game_results}. Game hints: {self.game_hints}"

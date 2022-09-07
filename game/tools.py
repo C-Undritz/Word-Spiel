@@ -39,3 +39,17 @@ def validate_word(value):
     #     return False
     # else:
     #     return True
+
+
+def alpha_dict():
+    """
+    Creates a dictionary of the alphabet for the Game class instantiation.
+    This is updated with the hint values throughout the game and used to
+    render the keyboard with hints
+    """
+    chars = list(map(chr, range(97, 123)))  # https://stackoverflow.com/questions/16060899/alphabet-range-in-python
+    chars_dict = {}
+    for item in chars:
+        chars_dict.update({item: 'blank'})
+
+    return chars_dict

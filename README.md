@@ -68,8 +68,7 @@ Therefore to fix it 'requests == 2.27.1' was manually added to the requirements.
 ># **REFERENCES**
 - CSS background adapted from codepen by [TokyoWeb](https://codepen.io/tokyoweb/pen/ZjdYVj)
 - Bespoke modal was created using the [w3schools guide](https://www.w3schools.com/howto/howto_css_modals.asp) 
-- Guide on spliting a dictionary into keys and values for the update_hints game class method was referenced from [GeeksforGeeks](https://www.geeksforgeeks.org/python-split-dictionary-keys-and-values-into-separate-lists/)
-
+- Guide on how to split a dictionary into keys and values and used in the hints_list game class method was referenced from [stackoverflow](https://stackoverflow.com/questions/41330311/split-dictionary-depending-on-key-lists)
 
 ># **CREDIT & THANKS**
 # Code

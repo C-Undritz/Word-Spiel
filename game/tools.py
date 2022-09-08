@@ -47,7 +47,7 @@ def alpha_dict():
     This is updated with the hint values throughout the game and used to
     render the keyboard with hints
     """
-    chars = list(map(chr, range(97, 123)))  # https://stackoverflow.com/questions/16060899/alphabet-range-in-python
+    chars = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm']
     chars_dict = {}
     for item in chars:
         chars_dict.update({item: 'blank'})

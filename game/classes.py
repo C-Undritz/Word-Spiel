@@ -40,11 +40,12 @@ class Game:
     """
     Game class to manage the variables and states of each full game played.
     """
-    def __init__(self, round_count, game_results, game_hints, win):
+    def __init__(self, round_count, game_results, game_hints_dict, game_hints_list, win):
         self.word = self.generate_word()
         self.round_count = round_count
         self.game_results = game_results
-        self.game_hints = game_hints
+        self.game_hints_dict = game_hints_dict
+        self.game_hints_list = game_hints_list
         self.win = win
 
     def generate_word(self):
@@ -84,26 +85,48 @@ class Game:
 
     def update_hints(self, item):
         """
-        Updates the ongoing hints against each letter in all guesses within a
-        game.  The first value in the value list is the fill colour of the
-        letter background and the second is the border colour.
+        Updates the ongoing hints dictionary against each letter in all
+        guesses within a game and assigns a value that will dicate how
+        the keyboard button is displayed.
         """
         dict_item = item[0]
         for key, value in dict_item.items():
             if len(value) == 1:
                 if value[0] == 1:
-                    self.game_hints.update({key: 'grey'})
+                    self.game_hints_dict.update({key: 'grey'})
                 elif value[0] == 2:
-                    self.game_hints.update({key: 'orange'})
+                    self.game_hints_dict.update({key: 'orange'})
                 elif value[0] == 3:
-                    self.game_hints.update({key: 'green'})
+                    self.game_hints_dict.update({key: 'green'})
             else:
                 if sum(value) in (5, 7, 8):
-                    self.game_hints.update({key: 'mixed'})
+                    self.game_hints_dict.update({key: 'mixed'})
                 elif sum(value) == 4:
-                    self.game_hints.update({key: 'orange'})
+                    self.game_hints_dict.update({key: 'orange'})
                 else:
-                    self.game_hints.update({key: 'green'})
+                    self.game_hints_dict.update({key: 'green'})
+
+            self.hints_list(self.game_hints_dict)
+
+    def hints_list(self, hints):
+        """
+        Takes the updated game_hints_dict and separates it into three
+        dictionaries based on a QWERTY keyboard.  Three dictionaries are
+        then placed in a list.
+        """
+        self.game_hints_list.clear()
+
+        row_one_keys = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p']
+        row_two_keys = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l']
+        row_three_keys = ['z', 'x', 'c', 'v', 'b', 'n', 'm']
+
+        row_one = {x: hints[x] for x in hints if x in row_one_keys}
+        row_two = {x: hints[x] for x in hints if x in row_two_keys}
+        row_three = {x: hints[x] for x in hints if x in row_three_keys}
+
+        self.game_hints_list.append(row_one)
+        self.game_hints_list.append(row_two)
+        self.game_hints_list.append(row_three)
 
     def determine_win(self, value):
         """
@@ -117,7 +140,7 @@ class Game:
         """
         Resets the instantiated Game class.
         """
-        self.__init__(1, [], alpha_dict(), False)
+        self.__init__(1, [], alpha_dict(), [], False)
 
     def __str__(self):
-        return f"Word: {self.word}. Round count: {self.round_count}. Win: {self.win}. Game results: {self.game_results}. Game hints: {self.game_hints}"
+        return f"Word: {self.word}. Round count: {self.round_count}. Win: {self.win}. Game results: {self.game_results}. Game hints list: {self.game_hints_list}"

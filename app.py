@@ -11,7 +11,7 @@ if os.path.exists("env.py"):
 app = Flask(__name__)
 rapidapi_key = os.environ.get("RAPIDAPI_KEY")
 app.secret_key = os.environ.get("SECRET_KEY")
-game = Game(1, [], {}, False)
+game = Game(1, [], {}, [], False)
 
 
 @app.route("/")

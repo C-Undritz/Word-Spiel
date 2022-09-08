@@ -263,7 +263,7 @@ input {
     width: 40px;
     height: 40px;
     padding: 5px;
-    margin: 4px;
+    margin: 10px 4px 4px 4px;
     font-size: 40px;
     font-family: 'Fredoka One', cursive;
     text-align: center;
@@ -280,6 +280,13 @@ input {
 #input-submit {
     display: flex;
     justify-content: center;
+}
+
+#output-boxes form input {
+    width: 25px;
+    height: 25px;
+    margin: 3px;
+    font-size: 25px;
 }
 
 .input-bg-green {
@@ -372,7 +379,7 @@ input {
     input {
         width: 35px;
         height: 35px;
-        margin: 3px;
+        margin: 10px 3px 3px 3px;
         font-size: 35px;
     }
 }

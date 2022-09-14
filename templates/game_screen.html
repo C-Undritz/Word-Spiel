@@ -1,130 +1,99 @@
-{% extends "base.html" %} {% block styles %}
+{% extends "base.html" %} 
+{% block content %}
 
 <div id="game-container">
   <!-- Displays past guesses with hints against each letter entered on that round -->
-  <div id="output-boxes">
-    {% if game.round_count > 0 %} {% for item in game.game_results %} {% for
-    key, value in item.current_results.items() %}
-    <form>
-      {% for number in value %} {% set iteration = loop.index0 %} {% if number
-      == '3' %} {% set row_class = "input-bg-green" %} {% elif number == '2' %}
-      {% set row_class = "input-bg-amber" %} {% else %} {% set row_class =
-      "input-bg-grey" %} {% endif %}
-      <input
-        type="text"
-        class="{{ row_class }}"
-        value="{{ key[iteration] }}"
-        maxlength="1"
-        style="text-transform: uppercase"
-      />
-      {% endfor %}
-    </form>
-    {% endfor %} {% endfor %} {% endif %}
-  </div>
+    <div id="output-boxes">
+        {% if game.round_count > 0 %} 
+            {% for item in game.game_results %} 
+                {% for key, value in item.current_results.items() %}
+                    <form>
+                        {% for number in value %} 
+                            {% set iteration = loop.index0 %} 
+                            {% if number == '3' %} 
+                                {% set row_class = "input-bg-green" %} 
+                            {% elif number == '2' %}
+                                {% set row_class = "input-bg-amber" %} 
+                            {% else %} 
+                                {% set row_class = "input-bg-grey" %} 
+                            {% endif %}
+                            <input type="text" class="{{ row_class }}" value="{{ key[iteration] }}" maxlength="1" style="text-transform: uppercase"/>
+                        {% endfor %}
+                    </form>
+                {% endfor %} 
+            {% endfor %} 
+        {% endif %}
+    </div>
 
   <!-- displays input boxes to add letter for word guess -->
-  <div id="user-input">
-    <form
-      id="char-input-form"
-      method="POST"
-      action="{{ url_for('start_game') }}"
-    >
-      <div id="input-boxes">
-        <input
-          type="text"
-          class="char-input-box"
-          id="1"
-          name="char-1"
-          maxlength="1"
-          style="text-transform: uppercase"
-        />
-        <input
-          type="text"
-          class="char-input-box"
-          id="2"
-          name="char-2"
-          maxlength="1"
-          style="text-transform: uppercase"
-        />
-        <input
-          type="text"
-          class="char-input-box"
-          id="3"
-          name="char-3"
-          maxlength="1"
-          style="text-transform: uppercase"
-        />
-        <input
-          type="text"
-          class="char-input-box"
-          id="4"
-          name="char-4"
-          maxlength="1"
-          style="text-transform: uppercase"
-        />
-        <input
-          type="text"
-          class="char-input-box"
-          id="5"
-          name="char-5"
-          maxlength="1"
-          style="text-transform: uppercase"
-        />
-      </div>
-      <div id="input-submit">
-        <button class="stn-btn btn-animation" type="submit" id="submit_btn">
-          Submit
-        </button>
-      </div>
-    </form>
+    <div id="user-input">
+        <form id="char-input-form" method="POST" action="{{ url_for('start_game') }}">
+            <div id="input-boxes">
+                <input type="text" class="char-input-box" id="1" name="char-1" maxlength="1" style="text-transform: uppercase"/>
+                <input type="text" class="char-input-box" id="2" name="char-2" maxlength="1" style="text-transform: uppercase"/>
+                <input type="text" class="char-input-box" id="3" name="char-3" maxlength="1" style="text-transform: uppercase"/>
+                <input type="text" class="char-input-box" id="4" name="char-4" maxlength="1" style="text-transform: uppercase"/>
+                <input type="text" class="char-input-box" id="5" name="char-5" maxlength="1" style="text-transform: uppercase"/>
+            </div>
+            <div id="input-submit">
+                <button class="stn-btn btn-animation" type="submit" id="submit_btn">
+                Submit
+                </button>
+            </div>
+        </form>
 
-    <!-- displays feedback messages to user -->
-    <div>
-      {% with messages = get_flashed_messages() %} {% if messages %} {% for
-      message in messages %}
-      <div class="flashes">
-        <p class="center-align">{{ message }}</p>
-      </div>
-      {% endfor %} {% endif %} {% endwith %}
+        <div>
+            {% for item in game.game_hints_list %}
+                {{ item }} 
+            {% endfor %}
+        </div>
+
+        <!-- displays feedback messages to user -->
+        <div>
+            {% with messages = get_flashed_messages() %} 
+                {% if messages %} 
+                    {% for message in messages %}
+                        <div class="flashes">
+                            <p class="center-align">{{ message }}</p>
+                        </div>
+                    {% endfor %} 
+                {% endif %} 
+            {% endwith %}
+        </div>
     </div>
-  </div>
 
-  <div id="win-bool" hidden>{{ game.win }}</div>
-
-  <!-- The Modal -->
-  <div id="myModal" class="modal">
-    <!-- Modal content -->
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      {% if game.win == True %}
-      <h1>Well done!</h1>
-      <p>
-        You have correctly guessed
-        <span class="revealed-word">{{ game.word }}</span>.
-      </p>
-      {% else %}
-      <h1>Out of guesses!</h1>
-      <p>
-        The word you were looking for is
-        <span class="revealed-word">{{ game.word }}</span>.
-      </p>
-      {% endif%}
+    <div id="win-bool" hidden>
+        {{ game.win }}
     </div>
-  </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            {% if game.win == True %}
+                <h1>Well done!</h1>
+                <p>You have correctly guessed <span class="revealed-word">{{ game.word }}</span>.</p>
+            {% else %}
+                <h1>Out of guesses!</h1>
+                <p>The word you were looking for is <span class="revealed-word">{{ game.word }}</span>.</p>
+            {% endif%}
+        </div>
+    </div>
 </div>
 
 <!-- Buttons to quit to menu and play again -->
 <div id="nav_btns">
-  <a href="{{ url_for('home') }}">
-    <button class="stn-btn btn-animation" type="submit">Quit</button>
-  </a>
-  <form action="{{ url_for('play_again') }}" method="post">
-    <button class="stn-btn btn-animation" type="submit">Play Again?</button>
-  </form>
+    <a href="{{ url_for('home') }}">
+        <button class="stn-btn btn-animation" type="submit">Quit</button>
+    </a>
+    <form action="{{ url_for('play_again') }}" method="post">
+        <button class="stn-btn btn-animation" type="submit">Play Again?</button>
+    </form>
 </div>
 
-{% endblock %} {% block scripts %}
+{% endblock %} 
 
+{% block scripts %}
 <script src="{{ url_for('static', filename='js/game_screen.js') }}"></script>
-
 {% endblock %}

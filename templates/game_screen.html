@@ -43,8 +43,15 @@
         </form>
 
         <div>
-            {% for item in game.game_hints_list %}
-                {{ item }} 
+            <p style="color: white">{{ game.game_hints_list[0] }}</p>
+            {% for dict in game.game_hints_list %}
+                {% for key, value in dict.items() %}
+                    <p>{{ key }}:{{ value }}</p>
+                {% endfor %}
+            {% endfor %}
+
+            {% for key, value in game.game_hints_list[0].items() %}
+                <p>{{ key }}:{{ value }}</p>
             {% endfor %}
         </div>
 

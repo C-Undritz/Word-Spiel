@@ -124,9 +124,14 @@ class Game:
         row_two = {x: hints[x] for x in hints if x in row_two_keys}
         row_three = {x: hints[x] for x in hints if x in row_three_keys}
 
+        # print(f'The type of the split dict into row one is: {type(row_one)}')
         self.game_hints_list.append(row_one)
         self.game_hints_list.append(row_two)
         self.game_hints_list.append(row_three)
+        print(f'game hints list index 0 is: {self.game_hints_list[0]}')
+        print(f'game hints list index 1 is: {self.game_hints_list[1]}')
+        print(f'the type of the hints list is: {type(self.game_hints_list)}')
+        print(f'The type of the index items in game hints list is: {type(self.game_hints_list[0])}')
 
     def determine_win(self, value):
         """

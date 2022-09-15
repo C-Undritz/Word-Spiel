@@ -42,11 +42,27 @@
             </div>
         </form>
 
-        <div>
+        <div id="hints-section">
             {%if game.game_hints_list[0] %}
+                <div id="hints-row-one">
                 {% for key, value in game.game_hints_list[0].items() %}
-                    <p>{{ key }}:{{ value }}</p>
+                    <button type="button" class="hint-btn">{{ key }}</button>
                 {% endfor %}
+                </div>
+            {% endif %}
+            {%if game.game_hints_list[1] %}
+                <div id="hints-row-two">
+                {% for key, value in game.game_hints_list[1].items() %}
+                    <button type="button" class="hint-btn">{{ key }}</button>
+                {% endfor %}
+                </div>
+            {% endif %}
+            {%if game.game_hints_list[2] %}
+                <div id="hints-row-three">
+                {% for key, value in game.game_hints_list[2].items() %}
+                    <button type="button" class="hint-btn">{{ key }}</button>
+                {% endfor %}
+                </div>
             {% endif %}
         </div>
 

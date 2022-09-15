@@ -301,6 +301,38 @@ input {
     background-color: var(--grey);
 }
 
+/*--- Hints section ---*/
+
+#hints-section {
+    margin-top: 10%;
+}
+
+#hints-row-two {
+    margin-left: 4%;
+}
+
+#hints-row-three {
+    margin-left: 8%;
+}
+
+.hint-btn {
+    width: 25px;
+    height: 25px;
+    margin: 2px 0px;
+    background-color: transparent;
+    border: solid 2px var(--white);
+    color: var(--white);
+    border-radius: 15%;
+}
+
+.hint-btn:hover,
+.hint-btn:focus {
+    width: 26px;
+    height: 26px;
+    margin: 1px -1px 1px 0px;
+}
+
+
 /*--- Flash messages ---*/
 
 .flashes p {

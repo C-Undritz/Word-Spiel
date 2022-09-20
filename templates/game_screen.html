@@ -29,11 +29,11 @@
     <div id="user-input">
         <form id="char-input-form" method="POST" action="{{ url_for('start_game') }}">
             <div id="input-boxes">
-                <input type="text" class="char-input-box" id="1" name="char-1" maxlength="1" style="text-transform: uppercase"/>
-                <input type="text" class="char-input-box" id="2" name="char-2" maxlength="1" style="text-transform: uppercase"/>
-                <input type="text" class="char-input-box" id="3" name="char-3" maxlength="1" style="text-transform: uppercase"/>
-                <input type="text" class="char-input-box" id="4" name="char-4" maxlength="1" style="text-transform: uppercase"/>
-                <input type="text" class="char-input-box" id="5" name="char-5" maxlength="1" style="text-transform: uppercase"/>
+                <input type="text" autocomplete="off" class="char-input-box" id="1" name="char-1" maxlength="1" style="text-transform: uppercase"/>
+                <input type="text" autocomplete="off" class="char-input-box" id="2" name="char-2" maxlength="1" style="text-transform: uppercase"/>
+                <input type="text" autocomplete="off" class="char-input-box" id="3" name="char-3" maxlength="1" style="text-transform: uppercase"/>
+                <input type="text" autocomplete="off" class="char-input-box" id="4" name="char-4" maxlength="1" style="text-transform: uppercase"/>
+                <input type="text" autocomplete="off" class="char-input-box" id="5" name="char-5" maxlength="1" style="text-transform: uppercase"/>
             </div>
             <div id="input-submit">
                 <button class="stn-btn btn-animation" type="submit" id="submit_btn">
@@ -41,31 +41,7 @@
                 </button>
             </div>
         </form>
-
-        <div id="hints-section">
-            {%if game.game_hints_list[0] %}
-                <div id="hints-row-one">
-                {% for key, value in game.game_hints_list[0].items() %}
-                    <button type="button" class="hint-btn">{{ key }}</button>
-                {% endfor %}
-                </div>
-            {% endif %}
-            {%if game.game_hints_list[1] %}
-                <div id="hints-row-two">
-                {% for key, value in game.game_hints_list[1].items() %}
-                    <button type="button" class="hint-btn">{{ key }}</button>
-                {% endfor %}
-                </div>
-            {% endif %}
-            {%if game.game_hints_list[2] %}
-                <div id="hints-row-three">
-                {% for key, value in game.game_hints_list[2].items() %}
-                    <button type="button" class="hint-btn">{{ key }}</button>
-                {% endfor %}
-                </div>
-            {% endif %}
-        </div>
-
+        
         <!-- displays feedback messages to user -->
         <div>
             {% with messages = get_flashed_messages() %} 
@@ -80,13 +56,77 @@
         </div>
     </div>
 
+    <!-- Keyboard hints section -->
+    <div id="hints-section">
+        {%if game.game_hints_list[0] %}
+            <div id="hints-row-one">
+            {% for key, value in game.game_hints_list[0].items() %}
+                {% for item in value %}
+                    {% if item == '4' %}
+                        {% set row_class = "btn-mixed-colour" %}
+                    {% elif item == '2' %}
+                        {% set row_class = "btn-orange-colour" %}
+                    {% elif item == '3' %}
+                        {% set row_class = "btn-green-colour" %}
+                    {% elif item == '1' %}
+                        {% set row_class = "btn-grey-colour" %}
+                    {% else %}
+                        {% set row_class = "btn-blank-colour" %}
+                    {% endif %}
+                    <button type="button" class="hint-btn {{ row_class }}">{{ key }}</button>
+                {% endfor %}
+            {% endfor %}
+            </div>
+        {% endif %}
+        {%if game.game_hints_list[1] %}
+            <div id="hints-row-two">
+            {% for key, value in game.game_hints_list[1].items() %}
+                {% for item in value %}
+                    {% if item == '4' %}
+                        {% set row_class = "btn-mixed-colour" %}
+                    {% elif item == '2' %}
+                        {% set row_class = "btn-orange-colour" %}
+                    {% elif item == '3' %}
+                        {% set row_class = "btn-green-colour" %}
+                    {% elif item == '1' %}
+                        {% set row_class = "btn-grey-colour" %}
+                    {% else %}
+                        {% set row_class = "btn-blank-colour" %}
+                    {% endif %}
+                    <button type="button" class="hint-btn {{ row_class }}">{{ key }}</button>
+                {% endfor %}
+            {% endfor %}
+            </div>
+        {% endif %}
+        {%if game.game_hints_list[2] %}
+            <div id="hints-row-three">
+            {% for key, value in game.game_hints_list[2].items() %}
+                {% for item in value %}
+                    {% if item == '4' %}
+                        {% set row_class = "btn-mixed-colour" %}
+                    {% elif item == '2' %}
+                        {% set row_class = "btn-orange-colour" %}
+                    {% elif item == '3' %}
+                        {% set row_class = "btn-green-colour" %}
+                    {% elif item == '1' %}
+                        {% set row_class = "btn-grey-colour" %}
+                    {% else %}
+                        {% set row_class = "btn-blank-colour" %}
+                    {% endif %}
+                    <button type="button" class="hint-btn {{ row_class }}">{{ key }}</button>
+                {% endfor %}
+            {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Hidden div containing the true/false value of the win -->
     <div id="win-bool" hidden>
         {{ game.win }}
     </div>
 
     <!-- The Modal -->
     <div id="myModal" class="modal">
-        <!-- Modal content -->
         <div class="modal-content">
             <span class="close">&times;</span>
             {% if game.win == True %}
@@ -99,7 +139,7 @@
         </div>
     </div>
 </div>
-
+    
 <!-- Buttons to quit to menu and play again -->
 <div id="nav_btns">
     <a href="{{ url_for('home') }}">

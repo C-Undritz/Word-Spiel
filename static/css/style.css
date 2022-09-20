@@ -305,6 +305,7 @@ input {
 
 #hints-section {
     margin-top: 10%;
+    z-index: 1;
 }
 
 #hints-row-two {
@@ -319,10 +320,34 @@ input {
     width: 25px;
     height: 25px;
     margin: 2px 0px;
-    background-color: transparent;
-    border: solid 2px var(--white);
     color: var(--white);
     border-radius: 15%;
+    text-transform: uppercase;
+}
+
+.btn-mixed-colour {
+    background-color: var(--green);
+    border: solid 2px var(--orange);
+}
+
+.btn-orange-colour {
+    background-color: var(--orange);
+    border: solid 2px var(--orange);
+}
+
+.btn-green-colour {
+    background-color: var(--green);
+    border: solid 2px var(--green);
+}
+
+.btn-grey-colour {
+    background-color: var(--grey);
+    border: solid 2px var(--grey);
+}
+
+.btn-blank-colour {
+    background-color: transparent;
+    border: solid 2px var(--white);
 }
 
 .hint-btn:hover,
@@ -331,7 +356,6 @@ input {
     height: 26px;
     margin: 1px -1px 1px 0px;
 }
-
 
 /*--- Flash messages ---*/
 

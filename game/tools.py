@@ -18,26 +18,27 @@ def validate_word(value):
     '''
     if len(value) != 5:
         return False
-    url = "https://wordsapiv1.p.rapidapi.com/words/" + value + "/typeOf"
+    return True
+    # url = "https://wordsapiv1.p.rapidapi.com/words/" + value + "/typeOf"
 
-    headers = {
-        "X-RapidAPI-Host": "wordsapiv1.p.rapidapi.com",
-        "X-RapidAPI-Key": rapidapi_key
-    }
+    # headers = {
+    #     "X-RapidAPI-Host": "wordsapiv1.p.rapidapi.com",
+    #     "X-RapidAPI-Key": rapidapi_key
+    # }
 
-    response = requests.request("GET", url, headers=headers)
-    data = response.text
-    result = ""
+    # response = requests.request("GET", url, headers=headers)
+    # data = response.text
+    # result = ""
 
-    x = 2
-    while x < 9:
-        result += data[x]
-        x += 1
+    # x = 2
+    # while x < 9:
+    #     result += data[x]
+    #     x += 1
 
-    if result == 'success':
-        return False
-    else:
-        return True
+    # if result == 'success':
+    #     return False
+    # else:
+    #     return True
 
 
 def alpha_dict():

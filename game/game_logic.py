@@ -93,12 +93,22 @@ def hints(answer, results):
     '''
     hints_dict = {}
 
+    # Checks and appends any letters that are a '3' (green) in the results.  
+    # Prevents the incorrect logging of green letter as a '1' where the first 
+    # instance if the letter in the results is in the wrong position.
+    for count, character in enumerate(answer):
+        if results[count] == '3':
+            entry = []
+            entry.append(int(results[count]))
+            hints_dict.update({character: entry})
+
+    # Checks and appends any letters that are a '1' (grey) or '2' (orange) in
+    # the results.
     for count, character in enumerate(answer):
         if character in hints_dict:
             value = hints_dict[character]
-            if value[0] == 1 or results[count] == '1':
-                # Ensures that values of 1 will only appear once or not at all
-                # they are after a 2 or 3
+            if value[0] == 1 or results[count] == '1' or results[count] == '3':
+                # Ensures values of 1 or 3 will only appear once or not at all.
                 continue
             value.append(int(results[count]))
             hints_dict.update({character: value})
@@ -106,6 +116,8 @@ def hints(answer, results):
             entry = []
             entry.append(int(results[count]))
             hints_dict.update({character: entry})
+
+    print(f'Hints dict following the recording of remaining values {hints_dict}')
 
     return hints_dict
 
